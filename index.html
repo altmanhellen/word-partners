@@ -40,6 +40,8 @@
   --bad: #c2392f;
   --bad-bg: #f8dcd3;
   --warn: #a86a00;
+  --note: #fbe7a1;
+  --note-ink: #1d1a17;
   --font-display: "Rubik", "Avenir Next", system-ui, sans-serif;
   --font-body: "Nunito", system-ui, -apple-system, sans-serif;
   --font-hand: "Caveat", "Bradley Hand", cursive;
@@ -240,7 +242,8 @@ button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px s
 
 /* Quiz / choose */
 .options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.opt { position: relative; isolation: isolate; border: 2px solid var(--line); background: var(--surface); color: var(--fg); border-radius: 16px 24px 14px 26px / 26px 14px 24px 16px; padding: 12px 10px; font: 700 1.08rem var(--font-body); cursor: pointer; text-align: center; line-height: 1.25; }
+.card .sentence.note { background: var(--note); color: var(--note-ink); font-weight: 700; padding: 14px 16px; border-radius: 6px 14px 8px 12px / 12px 6px 14px 8px; transform: rotate(-.6deg); box-shadow: 3px 4px 0 rgba(0,0,0,.18); margin-bottom: 6px; }
+.opt { position: relative; isolation: isolate; border: 2px dashed var(--muted); background: var(--bg); color: var(--fg); border-radius: 16px 24px 14px 26px / 26px 14px 24px 16px; padding: 12px 10px; font: 700 1.08rem var(--font-body); cursor: pointer; text-align: center; line-height: 1.25; }
 .opt:nth-child(2) { border-radius: 26px 14px 24px 16px / 16px 24px 14px 26px; transform: rotate(.5deg); }
 .opt:nth-child(3) { border-radius: 20px 26px 16px 22px / 18px 22px 26px 14px; transform: rotate(-.4deg); }
 .opt:nth-child(4) { transform: rotate(.3deg); }
@@ -1048,7 +1051,7 @@ function vStudy() {
   if (sess.step === "pick") {
     const answered = sess.pickOk !== null;
     inner = `<span class="q">${t("Which collocation has this meaning?")}</span>
-      <p class="sentence">“${esc(it.m)}”</p>
+      <p class="sentence note">${esc(it.m)}</p>
       <div class="options">${sess.opts.map((o, n) =>
         `<button class="opt ${answered && o === it.p ? "right" : ""}" data-sopt="${esc(o)}" ${answered ? "disabled" : ""}><span class="k">${n + 1}</span> ${esc(o)}</button>`).join("")}</div>
       ${answered ? `<div class="feedback ${sess.pickOk ? "ok" : "no"}"><span class="t">${sess.pickOk ? t("Correct!") : t("Here is the right collocation:")}</span><span class="row" style="gap:4px"><b>${esc(it.p)}</b> ${speakBtn(it.p)}</span>${tr(it)}</div>` : ""}`;
@@ -1196,7 +1199,7 @@ function vQuiz() {
     </div>
     <article class="card">
       <span class="q">${q.type === "pick" ? t("Which collocation has this meaning?") : t("Write the whole collocation")}</span>
-      ${q.type === "pick" ? `<p class="sentence">“${esc(it.m)}”</p>` : `<p class="meaning">${esc(it.m)}${tr(it) ? `<br>${tr(it)}` : ""}</p><p class="sentence">${answered ? marked(it) : gapped(it)}</p>`}
+      ${q.type === "pick" ? `<p class="sentence note">${esc(it.m)}</p>` : `<p class="meaning">${esc(it.m)}${tr(it) ? `<br>${tr(it)}` : ""}</p><p class="sentence">${answered ? marked(it) : gapped(it)}</p>`}
       ${body}
       ${fb}
     </article>
