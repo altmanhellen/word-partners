@@ -62,7 +62,7 @@ body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-in
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .36 0 0 0 0 .2 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
 .wrap { max-width: 760px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-main { position: relative; z-index: 1; padding-block: 22px calc(96px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 26px; }
+main { position: relative; z-index: 1; padding-block: 22px calc(96px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 40px; }
 main > * { min-width: 0; }
 
 /* Bottom tab bar, like an iPhone app */
@@ -107,7 +107,8 @@ button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px s
 .brand svg { width: 38px; height: 38px; flex: none; margin-top: -6px; }
 
 /* Today */
-.hero { display: grid; gap: 18px; }
+.hero { display: grid; gap: 34px; }
+.day-block { gap: 14px !important; }
 .top-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; position: relative; }
 .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .stat { border: 2px solid var(--line); background: var(--surface); padding: 10px 12px; border-radius: var(--sk3); }
@@ -123,25 +124,25 @@ button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px s
 .word-day .mn { color: var(--muted); font-size: .92rem; margin-top: 4px; }
 .example { display: flex; gap: 8px; align-items: center; font-size: 1.08rem; line-height: 1.55; }
 .example p { flex: 1; min-width: 0; }
-.cta { display: grid; gap: 12px; justify-items: center; text-align: center; }
+.cta { display: grid; gap: 16px; justify-items: center; text-align: center; padding-top: 22px; border-top: 2px dashed var(--soft); }
 .cta .btn.primary { min-width: 62%; }
 .tip p + p { margin-top: 4px; }
 
 .decks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-.deck { position: relative; overflow: hidden; isolation: isolate; border: 2px solid var(--line); border-radius: var(--sk1); background: var(--surface); padding: 0; display: grid; text-align: left; font: inherit; color: var(--ink); cursor: pointer; min-height: 170px; align-content: end; }
+.deck { --ink: #1d1a17; --fg: #1d1a17; --surface: #fffaf0; position: relative; overflow: hidden; isolation: isolate; border: 2px solid var(--line); border-radius: var(--sk1); background: var(--surface); padding: 0; display: grid; text-align: left; font: inherit; color: var(--ink); cursor: pointer; min-height: 170px; align-content: end; }
 .deck:nth-child(4n+2) { border-radius: var(--sk2); }
 .deck:nth-child(4n+3) { border-radius: var(--sk3); }
 .deck:active { transform: rotate(-.5deg) scale(.99); }
 .deck .paint { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; }
 .deck .txt { padding: 12px 12px 12px; display: grid; gap: 6px; }
-.deck h3 { font-size: 1.2rem; font-weight: 800; line-height: 1.1; text-shadow: 0 0 6px var(--surface), 0 0 2px var(--surface); }
+.deck h3 { font-size: 1.2rem; font-weight: 800; line-height: 1.1; color: var(--ink); }
 .deck .ex { display: none; }
 .deck .meta { display: flex; justify-content: space-between; gap: 6px; font-size: .78rem; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
 .decks.wide { grid-template-columns: 1fr; gap: 16px; }
 .decks.wide .deck { min-height: 150px; align-content: center; }
 .decks.wide .deck .txt { padding: 16px 18px; gap: 6px; max-width: 74%; }
 .decks.wide .deck h3 { font-size: 1.7rem; }
-.decks.wide .deck .ex { display: block; font-size: .95rem; line-height: 1.3; font-weight: 600; text-shadow: 0 0 6px var(--surface), 0 0 3px var(--surface); }
+.decks.wide .deck .ex { display: block; font-size: .95rem; line-height: 1.3; font-weight: 600; color: #3d372e; }
 .decks.wide .deck .meta { justify-content: flex-start; align-items: center; gap: 10px; }
 .decks.wide .deck .bar { flex: 1; }
 .deck .go { width: 26px; height: 26px; border: 2px solid var(--ink); border-radius: 50%; display: grid; place-items: center; background: var(--surface); flex: none; }
@@ -794,7 +795,7 @@ function paint(k, wide) {
   else if (kind === 2) { for (let i = 0; i < 26; i++) marks += `<circle cx="${x0 + 20 + r() * (W - x0 - 30)}" cy="${12 + r() * (H - 24)}" r="${3 + r() * 4}" fill="${b}" opacity=".85"/>`; marks += `<path d="M${x0 + 10} ${H * .75} C ${x0 + 80} ${H * .2}, ${W - 60} ${H * .9}, ${W - 4} ${H * .3}" stroke="#1d1a17" stroke-width="3" fill="none" stroke-linecap="round"/>`; }
   else for (let i = 0; i < 4; i++) marks += `<path d="M${x0 + r() * 60} ${20 + i * 38} C ${x0 + 70} ${i * 38}, ${W - 90} ${50 + i * 38}, ${W + 10} ${10 + i * 38}" stroke="${b}" stroke-width="${9 - i}" fill="none" stroke-linecap="round" opacity=".8"/>`;
   return `<svg class="paint" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <rect width="${W}" height="${H}" fill="${c}" opacity="${wide ? .55 : .35}"/>
+    <rect width="${W}" height="${H}" fill="#fffaf0"/><rect width="${W}" height="${H}" fill="${c}" opacity="${wide ? .45 : .35}"/>
     <g filter="url(#rough)"><path d="M${x0 - 10} ${H * .12} C ${x0 + 40} ${-10}, ${W} ${-14}, ${W + 10} ${H * .1} L ${W + 10} ${H + 10} C ${W * .7} ${H * 1.05}, ${x0 + 30} ${H + 4}, ${x0 + 6} ${H * .8} C ${x0 - 20} ${H * .6}, ${x0 + 20} ${H * .35}, ${x0 - 10} ${H * .12} Z" fill="${a}"/>
     ${marks}
     <path d="M${x0 + 20} ${H * .2} q30 -10 60 4" stroke="#fff" stroke-width="3" fill="none" opacity=".6" stroke-linecap="round"/></g>
@@ -882,10 +883,10 @@ function vToday() {
       <h1 class="brand"><span>Word +<br>Partners</span><svg class="smile" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${DOODLES.smile}</svg></h1>
       ${doodle("star", "right:58px;top:2px", 22)}${doodle("star", "right:8px;top:34px", 18)}
     </div>
-    <div class="stack" style="gap:10px">
+    <div class="stack day-block">
       <span class="label">${t("Collocation of the day")}</span>
       <div class="word-day">
-        ${doodle("waves", "left:-6px;top:-14px", 26)}${doodle("dots", "right:-4px;bottom:-30px;color:#f0a53a", 34)}
+        ${doodle("waves", "left:-6px;top:-14px", 26)}${doodle("dots", "right:-4px;top:-8px;color:#f0a53a", 30)}
         <div class="art">${HERO_ART}</div>
         <div><div class="ph">${esc(pick.p)}</div>${tr(pick) || `<p class="mn">${esc(pick.m)}</p>`}</div>
       </div>
@@ -893,7 +894,7 @@ function vToday() {
       <p class="muted" style="font-size:.95rem"><i>${esc(pick.x)}</i></p>
     </div>
     <div class="cta rel">
-      ${doodle("arrowL", "left:2px;top:-6px", 30)}
+      ${doodle("arrowL", "left:2px;top:16px", 30)}
       <p><b style="font-family:var(--font-display);font-size:1.15rem">${total ? t("{n} for today", { n: total + " " + pl(total, "card", "cards", "карточка", "карточки", "карточек") }) : t("All done for today")}</b><br><span class="muted">${total ? t("{a} to review, {b} new", { a: due, b: nl }) : t("Come back tomorrow, or take a quiz to practise more.")}</span></p>
       ${total ? `<button class="btn primary" data-act="study-all">${t("Start studying")}</button>` : `<button class="btn primary" data-go="quiz">${t("Take a quiz")}</button>`}
     </div>
