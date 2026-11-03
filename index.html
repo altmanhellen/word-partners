@@ -245,190 +245,190 @@ body.task-mode .card { flex: 1; min-height: 0; overflow-y: auto; box-shadow: non
 <main class="wrap" id="app"></main>
 
 <script>
-// Data format: deck | collocation | meaning | example with {answer} | real-life example | level | Russian translation
+// Data format: deck | collocation | meaning | example with {the whole collocation as used} | real-life example | level | Russian translation
 // Only correct collocations are stored: the app never shows wrong word pairs.
 const RAW = `
-make|make a decision|to choose something after thinking|We need to {make} a decision by Friday.|I can't make a decision about which phone to buy. Help!|B1|принять решение
-make|make a mistake|to do something wrong|Everyone {makes} mistakes when they learn a language.|Sorry, I made a mistake in my last email. Here's the right link.|A2|ошибиться, сделать ошибку
-make|make progress|to get better or move forward|You are {making} great progress with your English.|I'm making real progress with my speaking. I can chat for ten minutes now.|B1|делать успехи, продвигаться
-make|make an effort|to try hard|She {made} an effort to speak only English at work.|Thanks for making the effort to come all this way.|B1|постараться, приложить усилия
-make|make a phone call|to call someone|I need to {make} a quick phone call.|Hold on, I just need to make a phone call before the meeting.|A2|позвонить по телефону
-make|make money|to earn money|He {makes} money by selling old furniture online.|Lots of people make money from YouTube videos now.|A2|зарабатывать деньги
-make|make friends|to start new friendships|It's easy to {make} friends at a language school.|I made friends with my neighbours through a WhatsApp group.|A2|заводить друзей, подружиться
-make|make a noise|to produce a sound|Please don't {make} a noise, the baby is sleeping.|My laptop makes a strange noise when it gets hot.|A2|шуметь
-make|make a suggestion|to offer an idea|Can I {make} a suggestion?|Can I make a suggestion? Let's meet on Zoom instead.|B1|внести предложение, предложить
-make|make sense|to be logical and easy to understand|This sentence doesn't {make} sense.|That makes sense, thanks for explaining.|B1|иметь смысл, быть понятным
-make|make an excuse|to give a reason (often not true) for something|He always {makes} an excuse when he is late.|Stop making excuses and go to the gym!|B1|оправдываться, придумать отговорку
-make|make a plan|to decide what you will do|Let's {make} a plan for the weekend.|We made a plan to save money for a trip to Italy.|A2|составить план
-make|make a complaint|to say officially that something is wrong|I want to {make} a complaint about my room.|I made a complaint to the delivery company because my parcel never arrived.|B2|подать жалобу, пожаловаться
-make|make an appointment|to arrange a time to see a doctor, dentist, etc.|I {made} an appointment with the dentist.|You can make an appointment online through the app.|B1|записаться на приём
-make|make a difference|to have an important effect|Ten minutes of practice a day can {make} a big difference.|Small changes, like recycling, really make a difference.|B1|иметь значение, менять ситуацию к лучшему
-make|make room|to create space for someone or something|Could you {make} room for one more person?|I deleted old photos to make room on my phone.|B2|освободить место, подвинуться
-do|do homework|to do school work at home|I {do} my homework after dinner.|My son does his homework on a tablet now.|A2|делать домашнее задание
-do|do the housework|to clean and tidy your home|We {do} the housework together on Saturdays.|I listen to podcasts while I do the housework.|A2|заниматься домашними делами, убираться
-do|do business|to buy and sell; to trade|Our company {does} business with partners in Japan.|It's easier to do business online than it was ten years ago.|B1|вести дела, вести бизнес
-do|do your best|to try as hard as you can|Don't worry, just {do} your best.|I did my best in the interview. Now I just have to wait.|A2|сделать всё возможное, постараться
-do|do someone a favour|to help someone|Could you {do} me a favour?|Can you do me a favour and send me the file again?|B1|оказать услугу, сделать одолжение
-do|do exercise|to be physically active|I {do} exercise three times a week.|I try to do some exercise every day, even just a short walk.|A2|заниматься спортом, делать упражнения
-do|do the dishes|to wash plates, cups, etc.|It's your turn to {do} the dishes.|I'll cook if you do the dishes.|A2|мыть посуду
-do|do research|to study a subject carefully to find new facts|She is {doing} research on climate change.|Do some research before you book a hotel. Read the reviews!|B1|проводить исследование, изучать вопрос
-do|do damage|to harm or break something|The storm {did} a lot of damage to the town.|The hackers did serious damage to the company's website.|B2|нанести ущерб, навредить
-do|do a course|to study a series of lessons|I'm {doing} an online English course.|She's doing a course in digital marketing.|B1|проходить курс, учиться на курсах
-do|do the shopping|to buy food and things for the home|Who usually {does} the shopping in your family?|I do the shopping online and get it delivered.|A2|ходить за покупками, закупаться
-do|do harm|to cause damage or problems|A little chocolate won't {do} you any harm.|It doesn't do any harm to ask.|B2|навредить, причинить вред
-take|take a break|to stop working for a short time|Let's {take} a ten-minute break.|I've been working for three hours. I need to take a break.|A2|сделать перерыв
-take|take a photo|to use a camera to make a picture|Can you {take} a photo of us?|I took a photo of the menu so I could translate it later.|A2|сфотографировать, сделать снимок
-take|take a seat|to sit down (polite)|Please {take} a seat. The doctor will see you soon.|Hi, come in and take a seat.|A2|присесть, садиться (вежливо)
-take|take a risk|to do something that could be dangerous or fail|Starting a business means {taking} a risk.|She took a risk and moved to London without a job.|B1|рискнуть, пойти на риск
-take|take notes|to write down important information|I always {take} notes during the lesson.|I take notes on my phone during meetings.|B1|делать записи, конспектировать
-take|take care of|to look after someone or something|My sister {takes} care of my cat when I travel.|Don't worry, I'll take care of the tickets.|A2|заботиться, позаботиться о
-take|take part in|to join an activity|Twenty countries {took} part in the competition.|Over 500 people took part in the online survey.|B1|принимать участие в
-take|take an exam|to do a test|I'm {taking} my English exam in June.|I'm taking the IELTS exam next month.|B1|сдавать экзамен
-take|take advice|to do what someone suggests|You should {take} your doctor's advice.|I took your advice and started reading in English every day.|B1|последовать совету
-take|take responsibility|to accept that something is your job or your fault|He {took} responsibility for the mistake.|The company took responsibility for the data leak.|B2|взять на себя ответственность
-take|take place|to happen|The wedding will {take} place in May.|The concert takes place on Saturday night.|B1|происходить, состояться
-take|take your time|to not hurry|There's no rush, {take} your time.|Take your time, there's no rush to reply.|A2|не торопиться, не спешить
-have|have a good time|to enjoy yourself|Did you {have} a good time at the party?|Have a good time on holiday! Send pictures!|A2|хорошо провести время
-have|have breakfast|to eat breakfast|We usually {have} breakfast at seven.|I usually have breakfast at my desk.|A2|завтракать
-have|have a shower|to wash under a shower|I {have} a shower every morning.|I'll call you back, I'm just going to have a shower.|A2|принять душ
-have|have an argument|to disagree angrily with someone|They {had} an argument about money.|We had an argument about who forgot to pay the electricity bill.|B1|поссориться, поспорить
-have|have a look|to look at something|Can I {have} a look at your photos?|Have a look at this video, it's so funny.|A2|взглянуть, посмотреть
-have|have a chat|to talk in a friendly, informal way|Let's {have} a chat over coffee.|Let's have a quick chat after the meeting.|B1|поболтать
-have|have fun|to enjoy an activity, to laugh and play|The kids {had} fun at the beach.|Have fun at the concert tonight!|A2|веселиться, хорошо проводить время
-have|have a baby|to give birth|My cousin {had} a baby last month.|My colleague is on leave because she just had a baby.|B1|родить ребёнка
-get|get married|to become husband and wife|They {got} married in 2020.|They're getting married next summer in Spain.|A2|пожениться, выйти замуж, жениться
-get|get lost|to not know where you are|We {got} lost in the old town.|I never get lost now, I just use the map on my phone.|A2|заблудиться
-get|get ready|to prepare yourself|I need twenty minutes to {get} ready.|I'm getting ready. I'll be there in ten minutes.|A2|собираться, готовиться
-get|get a job|to find work|After university she {got} a job in a bank.|He got a job at a tech start-up.|A2|устроиться на работу
-get|get angry|to become angry|My dad {gets} angry when I'm late.|Don't get angry, it was only a joke.|B1|разозлиться, рассердиться
-get|get permission|to be allowed to do something|You need to {get} permission to film here.|Get permission before you post photos of other people online.|B1|получить разрешение
-get|get the message|to understand what someone means|OK, I {get} the message. You want to be alone.|He didn't answer my texts for a week. I get the message.|B2|понять намёк
-get|get better|to improve; to become healthy again|I hope you {get} better soon.|The weather is getting better, finally.|A2|поправиться, становиться лучше
-verbs|pay attention|to listen or watch carefully|Please {pay} attention to the instructions.|Pay attention to the small print before you sign anything.|B1|обращать внимание
-verbs|pay a visit|to go and see someone or a place|We {paid} a visit to my grandparents.|If you're in Rome, pay a visit to the Colosseum.|B2|навестить, посетить
-verbs|keep a secret|to not tell other people something|Can you {keep} a secret?|Can you keep a secret? I'm leaving my job.|B1|хранить секрет
-verbs|keep a promise|to do what you said you would do|He always {keeps} his promises.|Politicians don't always keep their promises.|B1|сдержать обещание
-verbs|break a promise|to not do what you said you would do|She never {breaks} a promise.|You said you would call me. You broke your promise!|B1|нарушить обещание
-verbs|break the law|to do something illegal|If you drive without a licence, you {break} the law.|In many countries, using your phone while driving is breaking the law.|B2|нарушить закон
-verbs|break a record|to do better than anyone before|He {broke} the world record for the 100 metres.|The video broke the record for the most views in one day.|B1|побить рекорд
-verbs|catch a cold|to become ill with a cold|Wear a coat or you'll {catch} a cold.|I think I caught a cold on the plane.|A2|простудиться
-verbs|catch a bus|to get on a bus in time|I {catch} the bus at 8:15 every morning.|I have to run, I need to catch the last bus.|A2|успеть на автобус, сесть на автобус
-verbs|save time|to use less time|Cooking at the weekend {saves} time during the week.|Online banking saves me a lot of time.|B1|экономить время
-verbs|waste time|to use time badly|Don't {waste} time on social media.|Stop wasting time scrolling and go to bed!|B1|тратить время впустую
-verbs|tell the truth|to say what is true|I always {tell} the truth.|To tell the truth, I didn't enjoy the film.|A2|говорить правду
-verbs|tell a joke|to say something funny|My uncle loves {telling} jokes.|He told a joke to start his presentation, and everyone laughed.|A2|рассказать анекдот, пошутить
-verbs|give a speech|to talk formally to a group of people|The manager {gave} a speech at the meeting.|My best friend gave a lovely speech at my wedding.|B1|выступить с речью
-verbs|raise a question|to start talking about a problem or topic|Your email {raises} an important question.|The new app raises a lot of questions about privacy.|C1|поднять вопрос
-verbs|run a business|to manage a company|My parents {run} a small business.|She runs a small online business selling handmade jewellery.|B1|вести бизнес, управлять компанией
-adj|heavy rain|a lot of rain|The match was cancelled because of {heavy} rain.|Heavy rain is expected this weekend, so take an umbrella.|B1|сильный дождь, ливень
-adj|strong wind|wind that moves fast|A {strong} wind blew the tree down.|Flights were delayed because of strong winds.|B1|сильный ветер
-adj|strong coffee|coffee with a lot of flavour|I need a cup of {strong} coffee.|I can't start my day without a strong coffee.|A2|крепкий кофе
-adj|heavy traffic|a lot of cars on the road|We were late because of {heavy} traffic.|There's heavy traffic on the motorway, so I'll be late.|B1|плотное движение, пробки
-adj|high price|a price that costs a lot|Many people can't pay such {high} prices.|High energy prices are a problem for many families.|B1|высокая цена
-adj|deep sleep|very relaxed sleep that is hard to wake from|He was in a {deep} sleep when the phone rang.|After the long flight, I fell into a deep sleep.|B2|глубокий сон
-adj|fast food|cheap food that is cooked quickly|I try not to eat {fast} food.|Fast food is quick, but it's not very healthy.|A2|фастфуд
-adj|close friend|a friend you know very well|She is my {close} friend from school.|Only close friends can see my Instagram stories.|B1|близкий друг
-adj|big mistake|a serious error|Leaving that job was a {big} mistake.|Not saving the document was a big mistake.|A2|большая ошибка
-adj|bright idea|a clever idea|That's a {bright} idea!|Whose bright idea was it to have a picnic in November?|B2|блестящая идея
-adj|serious problem|a big, important problem|Pollution is a {serious} problem in many cities.|Plastic waste is a serious problem for our oceans.|B1|серьёзная проблема
-adj|bitter disappointment|a very sad, painful feeling of failure|Losing the final was a {bitter} disappointment.|Not getting the job was a bitter disappointment.|C1|горькое разочарование
-adj|bad habit|something bad that you do often|Biting your nails is a {bad} habit.|Checking my phone in bed is a bad habit.|A2|вредная привычка
-adj|common sense|basic, practical good judgement|Use your {common} sense!|It's just common sense to back up your files.|B1|здравый смысл
-adj|light meal|a small meal|I just want a {light} meal tonight.|The café serves light meals and great coffee.|B1|лёгкая еда, лёгкий перекус
-adj|heavy smoker|someone who smokes a lot|My grandfather was a {heavy} smoker.|He was a heavy smoker, but he quit last year.|B2|заядлый курильщик
-adv|highly recommended|suggested by many people as very good|This restaurant is {highly} recommended.|This series is highly recommended. I watched it in two days.|B2|настоятельно рекомендуется, очень советую
-adv|deeply sorry|very sorry|I'm {deeply} sorry for your loss.|We are deeply sorry for the delay to your order.|B2|глубоко сожалею, искренне прошу прощения
-adv|bitterly cold|extremely cold|It was {bitterly} cold in Moscow.|It's bitterly cold outside, so wear a hat.|C1|ужасно холодно, лютый холод
-adv|fully aware|knowing something completely|I'm {fully} aware of the risks.|We are fully aware of the problem and we are working to fix it.|B2|полностью осознавать, прекрасно понимать
-adv|perfectly normal|completely normal|It's {perfectly} normal to feel nervous.|It's perfectly normal to make mistakes when you speak a new language.|B2|совершенно нормально
-adv|seriously ill|very ill|She was {seriously} ill last winter.|He was seriously ill last year, but now he's fine.|B2|тяжело болен
-adv|wide awake|completely awake|At 3 a.m. I was still {wide} awake.|I drank coffee too late and now I'm wide awake.|B2|совсем не сонный, бодрствующий
-adv|fast asleep|sleeping deeply|The children are {fast} asleep.|I was fast asleep when your message arrived.|B2|крепко спящий
-adv|painfully slow|very slow, in an annoying way|The internet is {painfully} slow today.|The Wi-Fi in this hotel is painfully slow.|C1|мучительно медленный
-adv|absolutely delicious|really, really tasty|This soup is {absolutely} delicious!|The pizza at that new place is absolutely delicious.|B1|невероятно вкусный
-work|meet a deadline|to finish work by the time needed|We worked late to {meet} the deadline.|I can't come tonight, I have to meet a deadline.|B2|уложиться в срок, успеть к дедлайну
-work|apply for a job|to ask officially for a job|I {applied} for a job at a hotel.|I applied for three jobs on LinkedIn this week.|B1|подать заявку на работу, откликнуться на вакансию
-work|attend a meeting|to go to a meeting|All staff must {attend} the meeting.|I can't attend the meeting. Can you send me the notes?|B1|присутствовать на совещании
-work|gain experience|to get knowledge and skill by doing something|I want to {gain} experience abroad.|An internship is a great way to gain experience.|B1|получить опыт, набраться опыта
-work|earn a living|to make the money you need to live|She {earns} a living as a translator.|Many people earn a living as freelancers now.|B2|зарабатывать на жизнь
-work|hold a meeting|to organise and have a meeting|We {hold} a team meeting every Monday.|We hold our team meetings online on Thursdays.|B2|проводить совещание
-work|reach an agreement|to agree after a discussion|Both sides finally {reached} an agreement.|After long talks, the two companies reached an agreement.|B2|прийти к соглашению, договориться
-work|pass an exam|to succeed in an exam|Did you {pass} your exam?|She passed all her exams with top marks.|A2|сдать экзамен
-work|fail a test|to not succeed in a test|I {failed} my driving test the first time.|Don't worry if you fail the test. You can take it again.|A2|провалить экзамен, не сдать тест
-work|give a presentation|to present information to a group|Tomorrow I'm {giving} a presentation to the team.|I have to give a presentation in English next week, and I'm nervous.|B1|выступить с презентацией
-work|set a goal|to decide what you want to achieve|It's important to {set} clear goals.|This year I set a goal to read 20 books in English.|B1|поставить цель
-work|launch a product|to start selling a new product|The company will {launch} a new phone in May.|The start-up launched its first product on Instagram.|B2|запустить продукт
-money|spend time|to use time doing something|I {spend} a lot of time reading.|I want to spend more time with my family.|A2|проводить время
-money|save money|to keep money and not spend it|We're {saving} money for a holiday.|I make coffee at home to save money.|A2|копить деньги, экономить
-money|run out of time|to have no more time left|We {ran} out of time before the end of the test.|Sorry, I ran out of time and didn't finish the report.|B1|не хватить времени, время закончилось
-money|on time|exactly at the planned time|The train arrived {on} time.|Please be on time for the video call.|A2|вовремя
-money|borrow money|to take money that you will give back later|Can I {borrow} some money from you?|I don't like borrowing money from friends.|A2|взять деньги в долг, занять денег
-money|pay in cash|to pay with notes and coins|Can I {pay} in cash?|Hardly anyone pays in cash these days.|A2|платить наличными
-money|a waste of money|a bad way to use money|That expensive phone was a {waste} of money.|That gym membership was a waste of money. I never went!|B1|пустая трата денег
-money|tight budget|very little money to spend|We are on a {tight} budget this month.|Here are ten ideas for a holiday on a tight budget.|B2|ограниченный бюджет
-money|free time|time when you are not working|What do you do in your {free} time?|In my free time, I watch series in English.|A2|свободное время
-money|kill time|to do something while you wait|We played cards to {kill} time at the airport.|I killed time on my phone while I waited for the doctor.|B2|убить время, скоротать время
-make|make a fortune|to earn a very large amount of money|He {made} a fortune selling apps.|She made a fortune with her online fitness classes.|B2|заработать состояние
-make|make ends meet|to have just enough money to pay for what you need|Many families struggle to {make} ends meet.|With rent so high, it's hard to make ends meet in London.|B2|сводить концы с концами
-make|make amends|to do something good to show you are sorry|He tried to {make} amends by cooking dinner.|I forgot her birthday, so I'm making amends with a big present.|C1|загладить вину
-make|make headway|to make progress, especially when it is difficult|We are finally {making} headway with the project.|After months of practice, I'm making headway with my listening.|C1|продвинуться, добиться успехов
-make|make a point of|to make sure you always do something|I {make} a point of reading the news in English every morning.|She makes a point of replying to every comment.|C1|взять за правило, обязательно делать
-do|do the trick|to solve a problem or give the result you need|A cup of tea should {do} the trick.|Restarting my phone did the trick.|B2|помочь, сработать
-do|do without|to manage without something|I can't {do} without my morning coffee.|Could you do without social media for a week?|B2|обходиться без
-do|do justice to|to show the true quality of something|The photo doesn't {do} justice to the view.|This short review doesn't do justice to the book.|C1|передать по-настоящему, отдать должное
-take|take into account|to think about something when you decide|We need to {take} the cost into account.|The app takes your level into account when it chooses new cards.|B2|учитывать, принимать во внимание
-take|take for granted|to not value something because you always have it|We often {take} clean water for granted.|Don't take your friends for granted.|B2|принимать как должное
-take|take offence|to feel upset by what someone says|Please don't {take} offence, it was only a joke.|He took offence at my comment about his car.|B2|обидеться
-take|take the initiative|to act first, before others do|She {took} the initiative and organised the meeting.|Nobody was planning the party, so I took the initiative.|C1|проявить инициативу
-take|take a toll|to have a bad effect over time|Working nights {took} a toll on his health.|Stress at work can take a toll on your sleep.|C1|сказываться, наносить вред
-have|have second thoughts|to start to doubt a decision|I'm {having} second thoughts about moving abroad.|She was having second thoughts about the job offer.|B2|сомневаться, передумывать
-have|have a point|to say something that is true or sensible|You {have} a point. Let's leave earlier.|OK, you have a point, the train is faster.|B2|быть в чём-то правым
-have|have an impact on|to have a strong effect on something|Social media {has} a huge impact on teenagers.|Remote work has had a big impact on city centres.|B2|влиять на, оказывать влияние на
-get|get the hang of|to learn how to do something|You'll soon {get} the hang of it.|I'm finally getting the hang of the new app.|B2|освоиться, наловчиться
-get|get rid of|to throw away or remove something|I want to {get} rid of my old clothes.|How can I get rid of all these notifications?|B2|избавиться от
-get|get on someone's nerves|to annoy someone|His loud music really {gets} on my nerves.|The constant emails are getting on my nerves.|B2|действовать на нервы
-verbs|draw a conclusion|to decide something after thinking about the facts|It's too early to {draw} a conclusion.|What conclusion can we draw from the survey?|B2|сделать вывод
-verbs|bear in mind|to remember something important|{Bear} in mind that the shop closes at six.|Bear in mind that prices may change.|B2|иметь в виду, учитывать
-verbs|jump to conclusions|to decide something too quickly, without all the facts|Don't {jump} to conclusions, wait for the results.|People jump to conclusions after reading one headline.|B2|делать поспешные выводы
-verbs|raise awareness|to help people know more about a problem|The campaign aims to {raise} awareness of mental health.|Influencers can raise awareness about climate change.|B2|привлекать внимание к проблеме, повышать осведомлённость
-verbs|meet the requirements|to have everything that is needed|Your application doesn't {meet} the requirements.|Check that your photo meets the requirements before you upload it.|B2|соответствовать требованиям
-verbs|break the ice|to make people feel relaxed when they first meet|He told a funny story to {break} the ice.|A simple question about the weekend can break the ice.|B2|растопить лёд, разрядить обстановку
-verbs|strike a balance|to find a good middle point between two things|It's hard to {strike} a balance between work and family.|I try to strike a balance between screen time and sport.|C1|найти баланс
-verbs|hold a grudge|to stay angry with someone for a long time|She never {holds} a grudge.|Life's too short to hold a grudge.|C1|держать обиду, затаить злобу
-verbs|pose a threat|to be a possible danger|Fake news {poses} a threat to democracy.|Rising sea levels pose a threat to coastal cities.|C1|представлять угрозу
-verbs|go to great lengths|to try very hard to do something|They {went} to great lengths to keep it a secret.|Some people go to great lengths to get the perfect photo.|C1|прилагать огромные усилия, идти на всё
-verbs|shed light on|to help explain something|The new study {sheds} light on how we sleep.|The documentary sheds light on life in the Arctic.|C1|пролить свет на
-adj|vast majority|almost all|The {vast} majority of people agree.|The vast majority of my messages are from work.|B2|подавляющее большинство
-adj|sharp increase|a sudden big rise|There was a {sharp} increase in prices last year.|We saw a sharp increase in online orders.|B2|резкий рост
-adj|broad range|a wide variety|The shop sells a {broad} range of products.|The course covers a broad range of topics.|B2|широкий выбор, широкий спектр
-adj|key factor|a very important reason or part|Price is a {key} factor for most buyers.|Good sleep is a key factor in learning.|B2|ключевой фактор
-adj|vivid memory|a very clear memory|I have a {vivid} memory of my first day at school.|I still have vivid memories of that trip to Japan.|B2|яркое воспоминание
-adj|golden opportunity|a very good chance|This job is a {golden} opportunity.|Don't miss this golden opportunity to study abroad.|B2|прекрасная возможность, золотой шанс
-adj|fierce competition|very strong competition|There is {fierce} competition for jobs in tech.|Fierce competition between delivery apps keeps prices low.|C1|жёсткая конкуренция
-adj|steep learning curve|a lot to learn in a short time|The new job has a {steep} learning curve.|Video editing has a steep learning curve, but it's fun.|C1|многому нужно научиться за короткий срок
-adj|grave concern|a very serious worry|The report raises {grave} concerns about safety.|Doctors expressed grave concern about the new virus.|C1|серьёзная обеспокоенность
-adj|sweeping changes|big changes that affect many things|The new boss made {sweeping} changes.|The government announced sweeping changes to the tax system.|C1|масштабные перемены
-adj|hard evidence|facts that prove something|There is no {hard} evidence that it works.|Without hard evidence, the police couldn't arrest him.|C1|неопровержимые доказательства
-adj|wishful thinking|believing something good because you want it to be true|Getting rich in a month is just {wishful} thinking.|Thinking the train will be on time is wishful thinking.|C1|принятие желаемого за действительное
-adv|strongly disagree|to disagree very much|I {strongly} disagree with this decision.|Many users strongly disagree with the new design.|B2|категорически не согласен
-adv|widely known|known by many people|It is {widely} known that exercise is good for you.|It's widely known that the café has the best cakes in town.|B2|широко известно
-adv|utterly exhausted|completely tired|After the marathon I was {utterly} exhausted.|I'm utterly exhausted after this week of meetings.|C1|совершенно измотан
-adv|blissfully unaware|happily not knowing about a problem|He was {blissfully} unaware of the mess in the kitchen.|We were blissfully unaware that our flight was cancelled.|C1|в счастливом неведении
-adv|deeply rooted|very strong and hard to change|These traditions are {deeply} rooted in the culture.|Fear of public speaking is often deeply rooted.|C1|глубоко укоренившийся
-adv|heavily dependent|needing something very much|The town is {heavily} dependent on tourism.|We are heavily dependent on our phones.|C1|сильно зависящий
-adv|readily available|easy to find or get|Fresh fruit is {readily} available all year.|Information is readily available online.|C1|легкодоступный
-adv|bitterly disappointed|very disappointed and upset|She was {bitterly} disappointed with the result.|Fans were bitterly disappointed when the concert was cancelled.|C1|горько разочарован
-work|climb the career ladder|to move to better jobs over time|She {climbed} the career ladder quickly.|He climbed the career ladder from intern to manager.|B2|подниматься по карьерной лестнице
-work|hand in your notice|to tell your employer that you are leaving|I {handed} in my notice yesterday.|She handed in her notice and moved to Spain.|B2|подать заявление об увольнении
-work|carry out research|to do research (formal)|The university {carried} out research on sleep.|Scientists carried out research on how phones affect sleep.|B2|проводить исследование
-work|meet expectations|to be as good as people hoped|The results did not {meet} expectations.|The new phone didn't meet my expectations.|B2|оправдать ожидания
-work|address an issue|to start dealing with a problem|We need to {address} this issue now.|The company promised to address the issue in the next update.|C1|заняться проблемой, решать вопрос
-work|draw up a contract|to write a formal agreement|The lawyer will {draw} up the contract.|We drew up a contract before starting the project.|C1|составить договор
-work|run a tight ship|to manage something strictly and well|Our manager {runs} a tight ship.|She runs a tight ship, so everything is always on time.|C1|держать всё под строгим контролем
-money|cost a fortune|to be very expensive|That watch {cost} a fortune.|Concert tickets cost a fortune these days.|B2|стоить целое состояние
-money|in the long run|over a long period of time in the future|It will save you money in the {long} run.|Learning a little every day works better in the long run.|B2|в долгосрочной перспективе, в конечном счёте
-money|break the bank|to cost too much money|A weekend away doesn't have to {break} the bank.|These headphones are good and won't break the bank.|C1|разорить, стоить слишком дорого
-money|pressed for time|having very little time|I'm a bit {pressed} for time today.|Sorry, I'm pressed for time. Can we talk tomorrow?|C1|в цейтноте, мало времени
+make|make a decision|to choose something after thinking|We need to {make a decision} by Friday.|I can't make a decision about which phone to buy. Help!|B1|принять решение
+make|make a mistake|to do something wrong|Everyone {makes mistakes} when they learn a language.|Sorry, I made a mistake in my last email. Here's the right link.|A2|ошибиться, сделать ошибку
+make|make progress|to get better or move forward|You are {making progress} with your English every day.|I'm making real progress with my speaking. I can chat for ten minutes now.|B1|делать успехи, продвигаться
+make|make an effort|to try hard|She {made an effort} to speak only English at work.|Thanks for making the effort to come all this way.|B1|постараться, приложить усилия
+make|make a phone call|to call someone|Excuse me, I need to {make a phone call}.|Hold on, I just need to make a phone call before the meeting.|A2|позвонить по телефону
+make|make money|to earn money|He {makes money} by selling old furniture online.|Lots of people make money from YouTube videos now.|A2|зарабатывать деньги
+make|make friends|to start new friendships|It's easy to {make friends} at a language school.|I made friends with my neighbours through a WhatsApp group.|A2|заводить друзей, подружиться
+make|make a noise|to produce a sound|Please don't {make a noise}, the baby is sleeping.|My laptop makes a strange noise when it gets hot.|A2|шуметь
+make|make a suggestion|to offer an idea|Can I {make a suggestion}?|Can I make a suggestion? Let's meet on Zoom instead.|B1|внести предложение, предложить
+make|make sense|to be logical and easy to understand|This sentence doesn't {make sense}.|That makes sense, thanks for explaining.|B1|иметь смысл, быть понятным
+make|make an excuse|to give a reason (often not true) for something|He always {makes an excuse} when he is late.|Stop making excuses and go to the gym!|B1|оправдываться, придумать отговорку
+make|make a plan|to decide what you will do|Let's {make a plan} for the weekend.|We made a plan to save money for a trip to Italy.|A2|составить план
+make|make a complaint|to say officially that something is wrong|I want to {make a complaint} about my room.|I made a complaint to the delivery company because my parcel never arrived.|B2|подать жалобу, пожаловаться
+make|make an appointment|to arrange a time to see a doctor, dentist, etc.|I {made an appointment} with the dentist.|You can make an appointment online through the app.|B1|записаться на приём
+make|make a difference|to have an important effect|Ten minutes of practice a day can {make a difference}.|Small changes, like recycling, really make a difference.|B1|иметь значение, менять ситуацию к лучшему
+make|make room|to create space for someone or something|Could you {make room} for one more person?|I deleted old photos to make room on my phone.|B2|освободить место, подвинуться
+do|do homework|to do school work at home|I {do my homework} after dinner.|My son does his homework on a tablet now.|A2|делать домашнее задание
+do|do the housework|to clean and tidy your home|We {do the housework} together on Saturdays.|I listen to podcasts while I do the housework.|A2|заниматься домашними делами, убираться
+do|do business|to buy and sell; to trade|Our company {does business} with partners in Japan.|It's easier to do business online than it was ten years ago.|B1|вести дела, вести бизнес
+do|do your best|to try as hard as you can|Don't worry, just {do your best}.|I did my best in the interview. Now I just have to wait.|A2|сделать всё возможное, постараться
+do|do someone a favour|to help someone|Could you {do me a favour}?|Can you do me a favour and send me the file again?|B1|оказать услугу, сделать одолжение
+do|do exercise|to be physically active|I {do exercise} three times a week.|I try to do some exercise every day, even just a short walk.|A2|заниматься спортом, делать упражнения
+do|do the dishes|to wash plates, cups, etc.|It's your turn to {do the dishes}.|I'll cook if you do the dishes.|A2|мыть посуду
+do|do research|to study a subject carefully to find new facts|She is {doing research} on climate change.|Do some research before you book a hotel. Read the reviews!|B1|проводить исследование, изучать вопрос
+do|do damage|to harm or break something|The storm {did damage} to many houses.|The hackers did serious damage to the company's website.|B2|нанести ущерб, навредить
+do|do a course|to study a series of lessons|I'm {doing a course} in English online.|She's doing a course in digital marketing.|B1|проходить курс, учиться на курсах
+do|do the shopping|to buy food and things for the home|Who usually {does the shopping} in your family?|I do the shopping online and get it delivered.|A2|ходить за покупками, закупаться
+do|do harm|to cause damage or problems|Too much sun can {do harm} to your skin.|It doesn't do any harm to ask.|B2|навредить, причинить вред
+take|take a break|to stop working for a short time|Let's {take a break} for ten minutes.|I've been working for three hours. I need to take a break.|A2|сделать перерыв
+take|take a photo|to use a camera to make a picture|Can you {take a photo} of us?|I took a photo of the menu so I could translate it later.|A2|сфотографировать, сделать снимок
+take|take a seat|to sit down (polite)|Please {take a seat}. The doctor will see you soon.|Hi, come in and take a seat.|A2|присесть, садиться (вежливо)
+take|take a risk|to do something that could be dangerous or fail|Starting a business means {taking a risk}.|She took a risk and moved to London without a job.|B1|рискнуть, пойти на риск
+take|take notes|to write down important information|I always {take notes} during the lesson.|I take notes on my phone during meetings.|B1|делать записи, конспектировать
+take|take care of|to look after someone or something|My sister {takes care of} my cat when I travel.|Don't worry, I'll take care of the tickets.|A2|заботиться, позаботиться о
+take|take part in|to join an activity|Twenty countries {took part in} the competition.|Over 500 people took part in the online survey.|B1|принимать участие в
+take|take an exam|to do a test|I'm {taking an exam} in June.|I'm taking the IELTS exam next month.|B1|сдавать экзамен
+take|take advice|to do what someone suggests|I always {take advice} from my grandmother.|I took your advice and started reading in English every day.|B1|последовать совету
+take|take responsibility|to accept that something is your job or your fault|He {took responsibility} for the mistake.|The company took responsibility for the data leak.|B2|взять на себя ответственность
+take|take place|to happen|The wedding will {take place} in May.|The concert takes place on Saturday night.|B1|происходить, состояться
+take|take your time|to not hurry|There's no rush, {take your time}.|Take your time, there's no rush to reply.|A2|не торопиться, не спешить
+have|have a good time|to enjoy yourself|Did you {have a good time} at the party?|Have a good time on holiday! Send pictures!|A2|хорошо провести время
+have|have breakfast|to eat breakfast|We usually {have breakfast} at seven.|I usually have breakfast at my desk.|A2|завтракать
+have|have a shower|to wash under a shower|I {have a shower} every morning.|I'll call you back, I'm just going to have a shower.|A2|принять душ
+have|have an argument|to disagree angrily with someone|They {had an argument} about money.|We had an argument about who forgot to pay the electricity bill.|B1|поссориться, поспорить
+have|have a look|to look at something|Can I {have a look} at your photos?|Have a look at this video, it's so funny.|A2|взглянуть, посмотреть
+have|have a chat|to talk in a friendly, informal way|Let's {have a chat} over coffee.|Let's have a quick chat after the meeting.|B1|поболтать
+have|have fun|to enjoy an activity, to laugh and play|The kids {had fun} at the beach.|Have fun at the concert tonight!|A2|веселиться, хорошо проводить время
+have|have a baby|to give birth|My cousin {had a baby} last month.|My colleague is on leave because she just had a baby.|B1|родить ребёнка
+get|get married|to become husband and wife|They {got married} in 2020.|They're getting married next summer in Spain.|A2|пожениться, выйти замуж, жениться
+get|get lost|to not know where you are|We {got lost} in the old town.|I never get lost now, I just use the map on my phone.|A2|заблудиться
+get|get ready|to prepare yourself|I need twenty minutes to {get ready}.|I'm getting ready. I'll be there in ten minutes.|A2|собираться, готовиться
+get|get a job|to find work|After university she {got a job} in a bank.|He got a job at a tech start-up.|A2|устроиться на работу
+get|get angry|to become angry|My dad {gets angry} when I'm late.|Don't get angry, it was only a joke.|B1|разозлиться, рассердиться
+get|get permission|to be allowed to do something|You need to {get permission} to film here.|Get permission before you post photos of other people online.|B1|получить разрешение
+get|get the message|to understand what someone means|OK, I {get the message}. You want to be alone.|He didn't answer my texts for a week. I get the message.|B2|понять намёк
+get|get better|to improve; to become healthy again|I hope you {get better} soon.|The weather is getting better, finally.|A2|поправиться, становиться лучше
+verbs|pay attention|to listen or watch carefully|Please {pay attention} to the instructions.|Pay attention to the small print before you sign anything.|B1|обращать внимание
+verbs|pay a visit|to go and see someone or a place|We {paid a visit} to my grandparents.|If you're in Rome, pay a visit to the Colosseum.|B2|навестить, посетить
+verbs|keep a secret|to not tell other people something|Can you {keep a secret}?|Can you keep a secret? I'm leaving my job.|B1|хранить секрет
+verbs|keep a promise|to do what you said you would do|He always {keeps his promises}.|Politicians don't always keep their promises.|B1|сдержать обещание
+verbs|break a promise|to not do what you said you would do|She never {breaks a promise}.|You said you would call me. You broke your promise!|B1|нарушить обещание
+verbs|break the law|to do something illegal|If you drive without a licence, you {break the law}.|In many countries, using your phone while driving is breaking the law.|B2|нарушить закон
+verbs|break a record|to do better than anyone before|He {broke the record} for the 100 metres.|The video broke the record for the most views in one day.|B1|побить рекорд
+verbs|catch a cold|to become ill with a cold|Wear a coat or you'll {catch a cold}.|I think I caught a cold on the plane.|A2|простудиться
+verbs|catch a bus|to get on a bus in time|I {catch the bus} at 8:15 every morning.|I have to run, I need to catch the last bus.|A2|успеть на автобус, сесть на автобус
+verbs|save time|to use less time|Cooking at the weekend {saves time} during the week.|Online banking saves me a lot of time.|B1|экономить время
+verbs|waste time|to use time badly|Don't {waste time} on social media.|Stop wasting time scrolling and go to bed!|B1|тратить время впустую
+verbs|tell the truth|to say what is true|I always {tell the truth}.|To tell the truth, I didn't enjoy the film.|A2|говорить правду
+verbs|tell a joke|to say something funny|My uncle loves {telling jokes}.|He told a joke to start his presentation, and everyone laughed.|A2|рассказать анекдот, пошутить
+verbs|give a speech|to talk formally to a group of people|The manager {gave a speech} at the meeting.|My best friend gave a lovely speech at my wedding.|B1|выступить с речью
+verbs|raise a question|to start talking about a problem or topic|Your email {raises a question}: who will pay?|The new app raises a lot of questions about privacy.|C1|поднять вопрос
+verbs|run a business|to manage a company|My parents {run a business} in the city centre.|She runs a small online business selling handmade jewellery.|B1|вести бизнес, управлять компанией
+adj|heavy rain|a lot of rain|The match was cancelled because of {heavy rain}.|Heavy rain is expected this weekend, so take an umbrella.|B1|сильный дождь, ливень
+adj|strong wind|wind that moves fast|A {strong wind} blew the tree down.|Flights were delayed because of strong winds.|B1|сильный ветер
+adj|strong coffee|coffee with a lot of flavour|I need a cup of {strong coffee}.|I can't start my day without a strong coffee.|A2|крепкий кофе
+adj|heavy traffic|a lot of cars on the road|We were late because of {heavy traffic}.|There's heavy traffic on the motorway, so I'll be late.|B1|плотное движение, пробки
+adj|high price|a price that costs a lot|Many people can't pay such {high prices}.|High energy prices are a problem for many families.|B1|высокая цена
+adj|deep sleep|very relaxed sleep that is hard to wake from|He was in a {deep sleep} when the phone rang.|After the long flight, I fell into a deep sleep.|B2|глубокий сон
+adj|fast food|cheap food that is cooked quickly|I try not to eat {fast food}.|Fast food is quick, but it's not very healthy.|A2|фастфуд
+adj|close friend|a friend you know very well|She is my {close friend} from school.|Only close friends can see my Instagram stories.|B1|близкий друг
+adj|big mistake|a serious error|Leaving that job was a {big mistake}.|Not saving the document was a big mistake.|A2|большая ошибка
+adj|bright idea|a clever idea|That's a {bright idea}!|Whose bright idea was it to have a picnic in November?|B2|блестящая идея
+adj|serious problem|a big, important problem|Pollution is a {serious problem} in many cities.|Plastic waste is a serious problem for our oceans.|B1|серьёзная проблема
+adj|bitter disappointment|a very sad, painful feeling of failure|Losing the final was a {bitter disappointment}.|Not getting the job was a bitter disappointment.|C1|горькое разочарование
+adj|bad habit|something bad that you do often|Biting your nails is a {bad habit}.|Checking my phone in bed is a bad habit.|A2|вредная привычка
+adj|common sense|basic, practical good judgement|Use your {common sense}!|It's just common sense to back up your files.|B1|здравый смысл
+adj|light meal|a small meal|I just want a {light meal} tonight.|The café serves light meals and great coffee.|B1|лёгкая еда, лёгкий перекус
+adj|heavy smoker|someone who smokes a lot|My grandfather was a {heavy smoker}.|He was a heavy smoker, but he quit last year.|B2|заядлый курильщик
+adv|highly recommended|suggested by many people as very good|This restaurant is {highly recommended}.|This series is highly recommended. I watched it in two days.|B2|настоятельно рекомендуется, очень советую
+adv|deeply sorry|very sorry|I'm {deeply sorry} for your loss.|We are deeply sorry for the delay to your order.|B2|глубоко сожалею, искренне прошу прощения
+adv|bitterly cold|extremely cold|It was {bitterly cold} in Moscow.|It's bitterly cold outside, so wear a hat.|C1|ужасно холодно, лютый холод
+adv|fully aware|knowing something completely|I'm {fully aware} of the risks.|We are fully aware of the problem and we are working to fix it.|B2|полностью осознавать, прекрасно понимать
+adv|perfectly normal|completely normal|It's {perfectly normal} to feel nervous.|It's perfectly normal to make mistakes when you speak a new language.|B2|совершенно нормально
+adv|seriously ill|very ill|She was {seriously ill} last winter.|He was seriously ill last year, but now he's fine.|B2|тяжело болен
+adv|wide awake|completely awake|At 3 a.m. I was still {wide awake}.|I drank coffee too late and now I'm wide awake.|B2|совсем не сонный, бодрствующий
+adv|fast asleep|sleeping deeply|The children are {fast asleep}.|I was fast asleep when your message arrived.|B2|крепко спящий
+adv|painfully slow|very slow, in an annoying way|The internet is {painfully slow} today.|The Wi-Fi in this hotel is painfully slow.|C1|мучительно медленный
+adv|absolutely delicious|really, really tasty|This soup is {absolutely delicious}!|The pizza at that new place is absolutely delicious.|B1|невероятно вкусный
+work|meet a deadline|to finish work by the time needed|We worked late to {meet the deadline}.|I can't come tonight, I have to meet a deadline.|B2|уложиться в срок, успеть к дедлайну
+work|apply for a job|to ask officially for a job|I {applied for a job} at a hotel.|I applied for three jobs on LinkedIn this week.|B1|подать заявку на работу, откликнуться на вакансию
+work|attend a meeting|to go to a meeting|All staff must {attend the meeting}.|I can't attend the meeting. Can you send me the notes?|B1|присутствовать на совещании
+work|gain experience|to get knowledge and skill by doing something|I want to {gain experience} abroad.|An internship is a great way to gain experience.|B1|получить опыт, набраться опыта
+work|earn a living|to make the money you need to live|She {earns a living} as a translator.|Many people earn a living as freelancers now.|B2|зарабатывать на жизнь
+work|hold a meeting|to organise and have a meeting|We {hold a meeting} every Monday.|We hold our team meetings online on Thursdays.|B2|проводить совещание
+work|reach an agreement|to agree after a discussion|Both sides finally {reached an agreement}.|After long talks, the two companies reached an agreement.|B2|прийти к соглашению, договориться
+work|pass an exam|to succeed in an exam|Did you {pass your exam}?|She passed all her exams with top marks.|A2|сдать экзамен
+work|fail a test|to not succeed in a test|I {failed a test} for the first time in my life.|Don't worry if you fail the test. You can take it again.|A2|провалить экзамен, не сдать тест
+work|give a presentation|to present information to a group|Tomorrow I'm {giving a presentation} to the team.|I have to give a presentation in English next week, and I'm nervous.|B1|выступить с презентацией
+work|set a goal|to decide what you want to achieve|It's important to {set a goal} for every week.|This year I set a goal to read 20 books in English.|B1|поставить цель
+work|launch a product|to start selling a new product|The company will {launch a product} for students in May.|The start-up launched its first product on Instagram.|B2|запустить продукт
+money|spend time|to use time doing something|I {spend time} reading every evening.|I want to spend more time with my family.|A2|проводить время
+money|save money|to keep money and not spend it|We're {saving money} for a holiday.|I make coffee at home to save money.|A2|копить деньги, экономить
+money|run out of time|to have no more time left|We {ran out of time} before the end of the test.|Sorry, I ran out of time and didn't finish the report.|B1|не хватить времени, время закончилось
+money|on time|exactly at the planned time|The train arrived {on time}.|Please be on time for the video call.|A2|вовремя
+money|borrow money|to take money that you will give back later|Can I {borrow money} from you?|I don't like borrowing money from friends.|A2|взять деньги в долг, занять денег
+money|pay in cash|to pay with notes and coins|Can I {pay in cash}?|Hardly anyone pays in cash these days.|A2|платить наличными
+money|a waste of money|a bad way to use money|That expensive phone was {a waste of money}.|That gym membership was a waste of money. I never went!|B1|пустая трата денег
+money|tight budget|very little money to spend|We are on a {tight budget} this month.|Here are ten ideas for a holiday on a tight budget.|B2|ограниченный бюджет
+money|free time|time when you are not working|What do you do in your {free time}?|In my free time, I watch series in English.|A2|свободное время
+money|kill time|to do something while you wait|We played cards to {kill time} at the airport.|I killed time on my phone while I waited for the doctor.|B2|убить время, скоротать время
+make|make a fortune|to earn a very large amount of money|He {made a fortune} selling apps.|She made a fortune with her online fitness classes.|B2|заработать состояние
+make|make ends meet|to have just enough money to pay for what you need|Many families struggle to {make ends meet}.|With rent so high, it's hard to make ends meet in London.|B2|сводить концы с концами
+make|make amends|to do something good to show you are sorry|He tried to {make amends} by cooking dinner.|I forgot her birthday, so I'm making amends with a big present.|C1|загладить вину
+make|make headway|to make progress, especially when it is difficult|We are finally {making headway} with the project.|After months of practice, I'm making headway with my listening.|C1|продвинуться, добиться успехов
+make|make a point of|to make sure you always do something|I {make a point of} reading the news in English every morning.|She makes a point of replying to every comment.|C1|взять за правило, обязательно делать
+do|do the trick|to solve a problem or give the result you need|A cup of tea should {do the trick}.|Restarting my phone did the trick.|B2|помочь, сработать
+do|do without|to manage without something|I can't {do without} my morning coffee.|Could you do without social media for a week?|B2|обходиться без
+do|do justice to|to show the true quality of something|The photo doesn't {do justice to} the view.|This short review doesn't do justice to the book.|C1|передать по-настоящему, отдать должное
+take|take into account|to think about something when you decide|We need to {take into account} the cost.|The app takes your level into account when it chooses new cards.|B2|учитывать, принимать во внимание
+take|take for granted|to not value something because you always have it|We often {take for granted} the people we love.|Don't take your friends for granted.|B2|принимать как должное
+take|take offence|to feel upset by what someone says|Please don't {take offence}, it was only a joke.|He took offence at my comment about his car.|B2|обидеться
+take|take the initiative|to act first, before others do|She {took the initiative} and organised the meeting.|Nobody was planning the party, so I took the initiative.|C1|проявить инициативу
+take|take a toll|to have a bad effect over time|Working nights {took a toll} on his health.|Stress at work can take a toll on your sleep.|C1|сказываться, наносить вред
+have|have second thoughts|to start to doubt a decision|I'm {having second thoughts} about moving abroad.|She was having second thoughts about the job offer.|B2|сомневаться, передумывать
+have|have a point|to say something that is true or sensible|You {have a point}. Let's leave earlier.|OK, you have a point, the train is faster.|B2|быть в чём-то правым
+have|have an impact on|to have a strong effect on something|Social media {has an impact on} teenagers.|Remote work has had a big impact on city centres.|B2|влиять на, оказывать влияние на
+get|get the hang of|to learn how to do something|You'll soon {get the hang of} it.|I'm finally getting the hang of the new app.|B2|освоиться, наловчиться
+get|get rid of|to throw away or remove something|I want to {get rid of} my old clothes.|How can I get rid of all these notifications?|B2|избавиться от
+get|get on someone's nerves|to annoy someone|His loud music really {gets on my nerves}.|The constant emails are getting on my nerves.|B2|действовать на нервы
+verbs|draw a conclusion|to decide something after thinking about the facts|It's too early to {draw a conclusion}.|What conclusion can we draw from the survey?|B2|сделать вывод
+verbs|bear in mind|to remember something important|{Bear in mind} that the shop closes at six.|Bear in mind that prices may change.|B2|иметь в виду, учитывать
+verbs|jump to conclusions|to decide something too quickly, without all the facts|Don't {jump to conclusions}, wait for the results.|People jump to conclusions after reading one headline.|B2|делать поспешные выводы
+verbs|raise awareness|to help people know more about a problem|The campaign aims to {raise awareness} of mental health.|Influencers can raise awareness about climate change.|B2|привлекать внимание к проблеме, повышать осведомлённость
+verbs|meet the requirements|to have everything that is needed|Your application doesn't {meet the requirements}.|Check that your photo meets the requirements before you upload it.|B2|соответствовать требованиям
+verbs|break the ice|to make people feel relaxed when they first meet|He told a funny story to {break the ice}.|A simple question about the weekend can break the ice.|B2|растопить лёд, разрядить обстановку
+verbs|strike a balance|to find a good middle point between two things|It's hard to {strike a balance} between work and family.|I try to strike a balance between screen time and sport.|C1|найти баланс
+verbs|hold a grudge|to stay angry with someone for a long time|She never {holds a grudge}.|Life's too short to hold a grudge.|C1|держать обиду, затаить злобу
+verbs|pose a threat|to be a possible danger|Fake news {poses a threat} to democracy.|Rising sea levels pose a threat to coastal cities.|C1|представлять угрозу
+verbs|go to great lengths|to try very hard to do something|They {went to great lengths} to keep it a secret.|Some people go to great lengths to get the perfect photo.|C1|прилагать огромные усилия, идти на всё
+verbs|shed light on|to help explain something|The new study {sheds light on} how we sleep.|The documentary sheds light on life in the Arctic.|C1|пролить свет на
+adj|vast majority|almost all|The {vast majority} of people agree.|The vast majority of my messages are from work.|B2|подавляющее большинство
+adj|sharp increase|a sudden big rise|There was a {sharp increase} in prices last year.|We saw a sharp increase in online orders.|B2|резкий рост
+adj|broad range|a wide variety|The shop sells a {broad range} of products.|The course covers a broad range of topics.|B2|широкий выбор, широкий спектр
+adj|key factor|a very important reason or part|Price is a {key factor} for most buyers.|Good sleep is a key factor in learning.|B2|ключевой фактор
+adj|vivid memory|a very clear memory|I have a {vivid memory} of my first day at school.|I still have vivid memories of that trip to Japan.|B2|яркое воспоминание
+adj|golden opportunity|a very good chance|This job is a {golden opportunity}.|Don't miss this golden opportunity to study abroad.|B2|прекрасная возможность, золотой шанс
+adj|fierce competition|very strong competition|There is {fierce competition} for jobs in tech.|Fierce competition between delivery apps keeps prices low.|C1|жёсткая конкуренция
+adj|steep learning curve|a lot to learn in a short time|The new job has a {steep learning curve}.|Video editing has a steep learning curve, but it's fun.|C1|многому нужно научиться за короткий срок
+adj|grave concern|a very serious worry|The report raises {grave concerns} about safety.|Doctors expressed grave concern about the new virus.|C1|серьёзная обеспокоенность
+adj|sweeping changes|big changes that affect many things|The new boss made {sweeping changes}.|The government announced sweeping changes to the tax system.|C1|масштабные перемены
+adj|hard evidence|facts that prove something|There is no {hard evidence} that it works.|Without hard evidence, the police couldn't arrest him.|C1|неопровержимые доказательства
+adj|wishful thinking|believing something good because you want it to be true|Getting rich in a month is just {wishful thinking}.|Thinking the train will be on time is wishful thinking.|C1|принятие желаемого за действительное
+adv|strongly disagree|to disagree very much|I {strongly disagree} with this decision.|Many users strongly disagree with the new design.|B2|категорически не согласен
+adv|widely known|known by many people|It is {widely known} that exercise is good for you.|It's widely known that the café has the best cakes in town.|B2|широко известно
+adv|utterly exhausted|completely tired|After the marathon I was {utterly exhausted}.|I'm utterly exhausted after this week of meetings.|C1|совершенно измотан
+adv|blissfully unaware|happily not knowing about a problem|He was {blissfully unaware} of the mess in the kitchen.|We were blissfully unaware that our flight was cancelled.|C1|в счастливом неведении
+adv|deeply rooted|very strong and hard to change|These traditions are {deeply rooted} in the culture.|Fear of public speaking is often deeply rooted.|C1|глубоко укоренившийся
+adv|heavily dependent|needing something very much|The town is {heavily dependent} on tourism.|We are heavily dependent on our phones.|C1|сильно зависящий
+adv|readily available|easy to find or get|Fresh fruit is {readily available} all year.|Information is readily available online.|C1|легкодоступный
+adv|bitterly disappointed|very disappointed and upset|She was {bitterly disappointed} with the result.|Fans were bitterly disappointed when the concert was cancelled.|C1|горько разочарован
+work|climb the career ladder|to move to better jobs over time|She {climbed the career ladder} quickly.|He climbed the career ladder from intern to manager.|B2|подниматься по карьерной лестнице
+work|hand in your notice|to tell your employer that you are leaving|I {handed in my notice} yesterday.|She handed in her notice and moved to Spain.|B2|подать заявление об увольнении
+work|carry out research|to do research (formal)|The university {carried out research} on sleep.|Scientists carried out research on how phones affect sleep.|B2|проводить исследование
+work|meet expectations|to be as good as people hoped|The results did not {meet expectations}.|The new phone didn't meet my expectations.|B2|оправдать ожидания
+work|address an issue|to start dealing with a problem|We need to {address this issue} now.|The company promised to address the issue in the next update.|C1|заняться проблемой, решать вопрос
+work|draw up a contract|to write a formal agreement|The lawyer will {draw up the contract}.|We drew up a contract before starting the project.|C1|составить договор
+work|run a tight ship|to manage something strictly and well|Our manager {runs a tight ship}.|She runs a tight ship, so everything is always on time.|C1|держать всё под строгим контролем
+money|cost a fortune|to be very expensive|That watch {cost a fortune}.|Concert tickets cost a fortune these days.|B2|стоить целое состояние
+money|in the long run|over a long period of time in the future|It will save you money {in the long run}.|Learning a little every day works better in the long run.|B2|в долгосрочной перспективе, в конечном счёте
+money|break the bank|to cost too much money|A weekend away doesn't have to {break the bank}.|These headphones are good and won't break the bank.|C1|разорить, стоить слишком дорого
+money|pressed for time|having very little time|I'm a bit {pressed for time} today.|Sorry, I'm pressed for time. Can we talk tomorrow?|C1|в цейтноте, мало времени
 `;
 
 const DECKS = [
@@ -514,8 +514,8 @@ function newIds(deck, n, lv) {
 // ---------- interface language ----------
 const lang = () => S.ui || (/^ru/i.test(navigator.language || "") ? "ru" : "en");
 const showRu = () => S.showRu !== false;
-const RU = {"Today": "Сегодня", "Words": "Слова", "Quiz": "Квиз", "Settings": "Настройки", "again soon": "скоро снова", "mo": "мес.", "Listen": "Слушать", "British": "британский", "American": "американский", "Australian": "австралийский", "Irish": "ирландский", "South African": "южноафриканский", "Indian": "индийский", "Canadian": "канадский", "New Zealand": "новозеландский", "All decks": "Все наборы", "Make": "Make", "Do": "Do", "Take": "Take", "Have": "Have", "Get": "Get", "Pay, keep, break & more": "Pay, keep, break и другие", "Adjective + noun": "Прилагательное + существительное", "Adverb + adjective": "Наречие + прилагательное", "Work & study": "Работа и учёба", "Time & money": "Время и деньги", "Create or produce something": "Создавать, производить", "Tasks, jobs and activities": "Задачи, дела и занятия", "Actions you choose to do": "Действия, которые вы выбираете", "Meals, experiences, events": "Еда, впечатления, события", "Changes and results": "Изменения и результаты", "Other strong verb partners": "Другие глаголы с устойчивыми партнёрами", "heavy rain, strong coffee": "heavy rain, strong coffee", "highly recommended, wide awake": "highly recommended, wide awake", "Meetings, exams, careers": "Совещания, экзамены, карьера", "Spending, saving, wasting": "Тратить, копить, терять", "{a} / {b} started": "начато {a} из {b}", "{n} to review": "повторить: {n}", "Your level: {l}": "Ваш уровень: {l}", "Progress by level": "Прогресс по уровням", "Change": "Изменить", "Elementary": "Начальный", "Intermediate": "Средний", "Upper-intermediate": "Выше среднего", "Advanced": "Продвинутый", "You are ready for {l}!": "Вы готовы к уровню {l}!", "You have learned {p}% of the {l} collocations.": "Вы выучили {p}% коллокаций уровня {l}.", "Move to {l}": "Перейти на {l}", "A collocation counts as learned when you remember it for a week or more.": "Коллокация считается выученной, когда вы помните её неделю и больше.", "New cards come from your level first. When you have learned {p}% of your level, the app suggests the next one.": "Сначала идут новые карточки вашего уровня. Когда вы выучите {p}% своего уровня, приложение предложит следующий.", "You are learning in mixed order: new cards come from all levels. You can change this in Settings.": "Вы учите вперемешку: новые карточки идут со всех уровней. Это можно изменить в Настройках.", "Learn words the way native speakers put them together.": "Учите слова так, как их сочетают носители языка.", "collocations started": "коллокаций начато", "well known (3+ weeks)": "хорошо знаю (3+ недели)", "{n} for today": "{n} на сегодня", "All done for today": "На сегодня всё", "{a} to review, {b} new": "повторить: {a}, новых: {b}", "Come back tomorrow, or take a quiz to practise more.": "Возвращайтесь завтра или пройдите квиз, чтобы потренироваться ещё.", "Start studying": "Начать учить", "Take a quiz": "Пройти квиз", "Collocation of the day": "Коллокация дня", "Decks": "Наборы", "See all words": "Все слова", "Your settings": "Ваши настройки", "Language": "Язык", "Interface language": "Язык интерфейса", "Show Russian translation": "Показывать перевод на русский", "The translation appears under each collocation. In the “choose” step it appears only after you answer, so it does not give away the answer.": "Перевод показывается под каждой коллокацией. В шаге «Выбор» он появляется только после ответа, чтобы не подсказывать.", "Cards and voice": "Карточки и голос", "How to learn new cards": "Как учить новые карточки", "By level": "По уровням", "Mixed (all levels)": "Вперемешку (все уровни)", "Start with your level and move up step by step.": "Начинайте со своего уровня и поднимайтесь шаг за шагом.", "New cards come from all levels, in random order.": "Новые карточки идут со всех уровней в случайном порядке.", "Your level": "Ваш уровень", "{n} collocations": "коллокаций: {n}", "New cards per day": "Новых карточек в день", "Voice": "Голос", "iPhone voice from Settings": "Голос из настроек iPhone", "Speed": "Скорость", "Slow": "Медленно", "Normal": "Обычно", "Fast": "Быстро", "Test voice": "Проверить голос", "VOICE_HELP": "★ = голос лучшего качества. На iPhone можно бесплатно скачать более естественные голоса: Настройки → Универсальный доступ → Устный контент (в новых iOS: «Чтение и речь») → Голоса → English. Выберите голос с пометкой «Premium» или «Enhanced» и скачайте его. Затем закройте и снова откройте приложение. Выберите «Голос из настроек iPhone» с тем же акцентом (британский или американский) или выберите голос по имени.", "Reset my progress": "Сбросить прогресс", "Your progress is saved in this browser only. {a} collocations in {b} decks. Levels follow CEFR (A2 to C1).": "Прогресс сохраняется только в этом браузере. Коллокаций: {a}, наборов: {b}. Уровни по шкале CEFR (от A2 до C1).", "Choose a deck": "Выберите набор", "Open a deck to read every collocation with its meaning and an example. You can study or quiz one deck at a time.": "Откройте набор, чтобы посмотреть все коллокации со значением и примером. Можно учить или проходить квиз по одному набору.", "New": "Новая", "Learning": "Учу", "Known": "Знаю", "Study {n}": "Учить {n}", "Nothing to study today": "Сегодня учить нечего", "Quiz this deck": "Квиз по набору", "Filter by level": "Фильтр по уровню", "All": "Все", "In real life": "В жизни", "Session complete": "Занятие окончено", "Well done!": "Отлично!", "You studied {a}. Your streak is {b}.": "Вы прошли {a}. Вы занимаетесь {b} подряд.", "Practise with a quiz": "Потренироваться в квизе", "Back to Today": "Вернуться на «Сегодня»", "Steps": "Шаги", "Choose": "Выбор", "Write": "Письмо", "Which collocation has this meaning?": "Какая коллокация имеет это значение?", "Correct!": "Правильно!", "Here is the right collocation:": "Правильная коллокация:", "Next: write it": "Дальше: напишите её", "Keyboard: Enter": "Клавиатура: Enter", "Choose one answer above": "Выберите один ответ выше", "Keyboard: 1 · 2 · 3 · 4": "Клавиатура: 1 · 2 · 3 · 4", "Write the missing word": "Напишите пропущенное слово", "Correct spelling!": "Написано правильно!", "The right word is: {w}": "Правильное слово: {w}", "Collocation": "Коллокация", "Say both sentences out loud. It helps you remember.": "Произнесите оба предложения вслух. Так легче запомнить.", "How easy was it?": "Насколько было легко?", "Hard": "Трудно", "Good": "Хорошо", "Easy": "Легко", "Keyboard: 1 Hard · 2 Good · 3 Easy": "Клавиатура: 1 Трудно · 2 Хорошо · 3 Легко", "This card will come back soon": "Эта карточка скоро вернётся", "Continue": "Продолжить", "Check": "Проверить", "I don't know": "Не знаю", "Keyboard: Enter to check": "Клавиатура: Enter — проверить", "Stop": "Стоп", "Progress": "Прогресс", "{n} left": "осталось {n}", "review": "повтор", "new": "новая", "Remember the right word partner": "Запомните правильную пару слов", "QUIZ_INTRO": "10 вопросов. Сначала вы выбираете коллокацию, которая подходит к значению (4 вопроса). Потом сами пишете пропущенное слово (6 вопросов), а приложение проверяет написание. Вы видите только правильный английский. Всё, что вы пропустите, вернётся на следующем занятии.", "Deck": "Набор", "All decks (mixed)": "Все наборы (вперемешку)", "Level": "Уровень", "All levels": "Все уровни", "Start quiz": "Начать квиз", "Perfect score!": "Идеальный результат!", "Great work!": "Отличная работа!", "Good practice.": "Хорошая тренировка.", "Keep going. Every mistake teaches you something.": "Продолжайте. Каждая ошибка чему-то учит.", "Result": "Результат", "Practise these again": "Повторите эти", "New quiz": "Новый квиз", "Change deck": "Сменить набор", "The right collocation is marked in green.": "Правильная коллокация отмечена зелёным.", "See result": "Посмотреть результат", "Next question": "Следующий вопрос", "Hint: the first letter is shown in the box": "Подсказка: первая буква показана в поле", "Hint": "Подсказка", "Show answer": "Показать ответ", "Delete all your progress?": "Удалить весь прогресс?", "This cannot be undone.": "Это нельзя отменить.", "Yes, reset": "Да, сбросить", "Cancel": "Отмена", "Choose level {l}": "Выбрать уровень {l}", "Tap a level to choose it.": "Нажмите на уровень, чтобы выбрать его."};
-const EN = { VOICE_HELP: "★ = better quality voice. On iPhone you can download more natural voices for free: Settings → Accessibility → Spoken Content (in newer iOS: Read & Speak) → Voices → English. Choose a voice marked “Premium” or “Enhanced” and download it. Then close and reopen this app. Choose “iPhone voice from Settings” with the same accent (British or American) to use it, or pick a voice by name.", QUIZ_INTRO: "10 questions. First you choose the collocation that matches the meaning (4 questions). Then you write the missing word yourself (6 questions), and the app checks your spelling. You only ever see correct English. Anything you miss comes back in your next study session." };
+const RU = {"Today": "Сегодня", "Words": "Слова", "Quiz": "Квиз", "Settings": "Настройки", "again soon": "скоро снова", "mo": "мес.", "Listen": "Слушать", "British": "британский", "American": "американский", "Australian": "австралийский", "Irish": "ирландский", "South African": "южноафриканский", "Indian": "индийский", "Canadian": "канадский", "New Zealand": "новозеландский", "All decks": "Все наборы", "Make": "Make", "Do": "Do", "Take": "Take", "Have": "Have", "Get": "Get", "Pay, keep, break & more": "Pay, keep, break и другие", "Adjective + noun": "Прилагательное + существительное", "Adverb + adjective": "Наречие + прилагательное", "Work & study": "Работа и учёба", "Time & money": "Время и деньги", "Create or produce something": "Создавать, производить", "Tasks, jobs and activities": "Задачи, дела и занятия", "Actions you choose to do": "Действия, которые вы выбираете", "Meals, experiences, events": "Еда, впечатления, события", "Changes and results": "Изменения и результаты", "Other strong verb partners": "Другие глаголы с устойчивыми партнёрами", "heavy rain, strong coffee": "heavy rain, strong coffee", "highly recommended, wide awake": "highly recommended, wide awake", "Meetings, exams, careers": "Совещания, экзамены, карьера", "Spending, saving, wasting": "Тратить, копить, терять", "{a} / {b} started": "начато {a} из {b}", "{n} to review": "повторить: {n}", "Your level: {l}": "Ваш уровень: {l}", "Progress by level": "Прогресс по уровням", "Change": "Изменить", "Elementary": "Начальный", "Intermediate": "Средний", "Upper-intermediate": "Выше среднего", "Advanced": "Продвинутый", "You are ready for {l}!": "Вы готовы к уровню {l}!", "You have learned {p}% of the {l} collocations.": "Вы выучили {p}% коллокаций уровня {l}.", "Move to {l}": "Перейти на {l}", "A collocation counts as learned when you remember it for a week or more.": "Коллокация считается выученной, когда вы помните её неделю и больше.", "New cards come from your level first. When you have learned {p}% of your level, the app suggests the next one.": "Сначала идут новые карточки вашего уровня. Когда вы выучите {p}% своего уровня, приложение предложит следующий.", "You are learning in mixed order: new cards come from all levels. You can change this in Settings.": "Вы учите вперемешку: новые карточки идут со всех уровней. Это можно изменить в Настройках.", "Learn words the way native speakers put them together.": "Учите слова так, как их сочетают носители языка.", "collocations started": "коллокаций начато", "well known (3+ weeks)": "хорошо знаю (3+ недели)", "{n} for today": "{n} на сегодня", "All done for today": "На сегодня всё", "{a} to review, {b} new": "повторить: {a}, новых: {b}", "Come back tomorrow, or take a quiz to practise more.": "Возвращайтесь завтра или пройдите квиз, чтобы потренироваться ещё.", "Start studying": "Начать учить", "Take a quiz": "Пройти квиз", "Collocation of the day": "Коллокация дня", "Decks": "Наборы", "See all words": "Все слова", "Your settings": "Ваши настройки", "Language": "Язык", "Interface language": "Язык интерфейса", "Show Russian translation": "Показывать перевод на русский", "The translation appears under each collocation. In the “choose” step it appears only after you answer, so it does not give away the answer.": "Перевод показывается под каждой коллокацией. В шаге «Выбор» он появляется только после ответа, чтобы не подсказывать.", "Cards and voice": "Карточки и голос", "How to learn new cards": "Как учить новые карточки", "By level": "По уровням", "Mixed (all levels)": "Вперемешку (все уровни)", "Start with your level and move up step by step.": "Начинайте со своего уровня и поднимайтесь шаг за шагом.", "New cards come from all levels, in random order.": "Новые карточки идут со всех уровней в случайном порядке.", "Your level": "Ваш уровень", "{n} collocations": "коллокаций: {n}", "New cards per day": "Новых карточек в день", "Voice": "Голос", "iPhone voice from Settings": "Голос из настроек iPhone", "Speed": "Скорость", "Slow": "Медленно", "Normal": "Обычно", "Fast": "Быстро", "Test voice": "Проверить голос", "VOICE_HELP": "★ = голос лучшего качества. На iPhone можно бесплатно скачать более естественные голоса: Настройки → Универсальный доступ → Устный контент (в новых iOS: «Чтение и речь») → Голоса → English. Выберите голос с пометкой «Premium» или «Enhanced» и скачайте его. Затем закройте и снова откройте приложение. Выберите «Голос из настроек iPhone» с тем же акцентом (британский или американский) или выберите голос по имени.", "Reset my progress": "Сбросить прогресс", "Your progress is saved in this browser only. {a} collocations in {b} decks. Levels follow CEFR (A2 to C1).": "Прогресс сохраняется только в этом браузере. Коллокаций: {a}, наборов: {b}. Уровни по шкале CEFR (от A2 до C1).", "Choose a deck": "Выберите набор", "Open a deck to read every collocation with its meaning and an example. You can study or quiz one deck at a time.": "Откройте набор, чтобы посмотреть все коллокации со значением и примером. Можно учить или проходить квиз по одному набору.", "New": "Новая", "Learning": "Учу", "Known": "Знаю", "Study {n}": "Учить {n}", "Nothing to study today": "Сегодня учить нечего", "Quiz this deck": "Квиз по набору", "Filter by level": "Фильтр по уровню", "All": "Все", "In real life": "В жизни", "Session complete": "Занятие окончено", "Well done!": "Отлично!", "You studied {a}. Your streak is {b}.": "Вы прошли {a}. Вы занимаетесь {b} подряд.", "Practise with a quiz": "Потренироваться в квизе", "Back to Today": "Вернуться на «Сегодня»", "Steps": "Шаги", "Choose": "Выбор", "Write": "Письмо", "Which collocation has this meaning?": "Какая коллокация имеет это значение?", "Correct!": "Правильно!", "Here is the right collocation:": "Правильная коллокация:", "Next: write it": "Дальше: напишите её", "Keyboard: Enter": "Клавиатура: Enter", "Choose one answer above": "Выберите один ответ выше", "Keyboard: 1 · 2 · 3 · 4": "Клавиатура: 1 · 2 · 3 · 4", "Write the missing word": "Напишите пропущенное слово", "Correct spelling!": "Всё написано правильно!", "The right word is: {w}": "Правильное слово: {w}", "Collocation": "Коллокация", "Say both sentences out loud. It helps you remember.": "Произнесите оба предложения вслух. Так легче запомнить.", "How easy was it?": "Насколько было легко?", "Hard": "Трудно", "Good": "Хорошо", "Easy": "Легко", "Keyboard: 1 Hard · 2 Good · 3 Easy": "Клавиатура: 1 Трудно · 2 Хорошо · 3 Легко", "This card will come back soon": "Эта карточка скоро вернётся", "Continue": "Продолжить", "Check": "Проверить", "I don't know": "Не знаю", "Keyboard: Enter to check": "Клавиатура: Enter — проверить", "Stop": "Стоп", "Progress": "Прогресс", "{n} left": "осталось {n}", "review": "повтор", "new": "новая", "Remember the right word partner": "Запомните правильную пару слов", "QUIZ_INTRO": "10 вопросов. Сначала вы выбираете коллокацию, которая подходит к значению (4 вопроса). Потом сами пишете всю коллокацию целиком (6 вопросов), а приложение проверяет написание. Вы видите только правильный английский. Всё, что вы пропустите, вернётся на следующем занятии.", "Deck": "Набор", "All decks (mixed)": "Все наборы (вперемешку)", "Level": "Уровень", "All levels": "Все уровни", "Start quiz": "Начать квиз", "Perfect score!": "Идеальный результат!", "Great work!": "Отличная работа!", "Good practice.": "Хорошая тренировка.", "Keep going. Every mistake teaches you something.": "Продолжайте. Каждая ошибка чему-то учит.", "Result": "Результат", "Practise these again": "Повторите эти", "New quiz": "Новый квиз", "Change deck": "Сменить набор", "The right collocation is marked in green.": "Правильная коллокация отмечена зелёным.", "See result": "Посмотреть результат", "Next question": "Следующий вопрос", "Hint: the first letter is shown in the box": "Подсказка: первая буква показана в поле", "Hint": "Подсказка", "Show answer": "Показать ответ", "Delete all your progress?": "Удалить весь прогресс?", "This cannot be undone.": "Это нельзя отменить.", "Yes, reset": "Да, сбросить", "Cancel": "Отмена", "Write the missing words": "Напишите пропущенные слова", "Write the whole collocation": "Напишите коллокацию целиком", "Hint: the first letter of each word is shown in the box": "Подсказка: в поле показаны первые буквы каждого слова", "The right answer is: {w}": "Правильный ответ: {w}", "Choose level {l}": "Выбрать уровень {l}", "Tap a level to choose it.": "Нажмите на уровень, чтобы выбрать его."};
+const EN = { VOICE_HELP: "★ = better quality voice. On iPhone you can download more natural voices for free: Settings → Accessibility → Spoken Content (in newer iOS: Read & Speak) → Voices → English. Choose a voice marked “Premium” or “Enhanced” and download it. Then close and reopen this app. Choose “iPhone voice from Settings” with the same accent (British or American) to use it, or pick a voice by name.", QUIZ_INTRO: "10 questions. First you choose the collocation that matches the meaning (4 questions). Then you write the whole collocation yourself (6 questions), and the app checks your spelling. You only ever see correct English. Anything you miss comes back in your next study session." };
 const t = (s, v = {}) => ((lang() === "ru" && RU[s]) || EN[s] || s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m));
 // Plural: English one/other; Russian one/few/many.
 function pl(n, en1, enN, ru1, ru2, ru5) {
@@ -528,7 +528,7 @@ const tr = it => showRu() && it.ru ? `<span class="ru" lang="ru">${esc(it.ru)}</
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const gapped = it => esc(it.e).replace(/\{.+?\}/, '<span class="gap" aria-label="blank"></span>');
+const gapped = it => esc(it.e).replace(/\{(.+?)\}/, (m, a) => `<span class="gap" aria-label="blank" style="min-width:${Math.max(4.5, a.length * 0.55)}em"></span>`);
 const marked = it => esc(it.e).replace(/\{(.+?)\}/, "<mark>$1</mark>");
 const plain = it => it.e.replace(/[{}]/g, "");
 const deckName = id => t((DECKS.find(d => d.id === id) || {}).name || "All decks");
@@ -740,7 +740,12 @@ function startStudy(deck, lv) {
   go("study");
 }
 const actions = (top, row, keys) => `<div class="actions"><p class="a-top">${top || ""}</p><div class="a-row">${row || ""}</div><p class="keys">${keys || ""}</p></div>`;
-const norm = t => String(t).toLowerCase().replace(/[’‘]/g, "'").replace(/\s+/g, " ").trim();
+const norm = t => String(t).toLowerCase().replace(/[’‘]/g, "'").replace(/[.,!?;:]/g, "").replace(/\s+/g, " ").trim();
+// When checking a typed answer, small words like "a", "the", "my" do not decide right or wrong.
+const SMALL = new Set(["a", "an", "the", "my", "your", "his", "her", "our", "their", "its", "me", "you", "him", "them", "this", "that", "some"]);
+const core = t => norm(t).split(" ").filter(w => !SMALL.has(w)).join(" ");
+const same = (typed, ans) => norm(typed) === norm(ans) || core(typed) === core(ans);
+const hintOf = ans => ans.split(" ").map(w => w[0] + "…").join(" ");
 function setCard() {
   if (!sess.queue.length) return;
   const it = BY_ID[sess.queue[0]];
@@ -776,13 +781,13 @@ function vStudy() {
       : actions(t("Choose one answer above"), "", t("Keyboard: 1 · 2 · 3 · 4"));
   } else {
     const done = sess.step === "done";
-    inner = `<span class="label">${t("Write the missing word")}</span>
+    inner = `<span class="label">${t("Write the whole collocation")}</span>
       <p class="meaning">${esc(it.m)}${tr(it) ? `<br>${tr(it)}` : ""}</p>
       <p class="sentence">${done ? marked(it) : gapped(it)}</p>
       <form class="type-row" id="study-form" autocomplete="off">
-        <input id="study-input" aria-label="${t("Write the missing word")}" placeholder="${t("Write the missing word")}" ${done ? `value="${esc(it.ans)}" disabled class="${sess.typeOk ? "in-ok" : "in-show"}"` : ""} autocapitalize="off" autocorrect="off" spellcheck="false">
+        <input id="study-input" aria-label="${t("Write the missing words")}" placeholder="${t("Write the missing words")}" ${done ? `value="${esc(it.ans)}" disabled class="${sess.typeOk ? "in-ok" : "in-show"}"` : ""} autocapitalize="off" autocorrect="off" spellcheck="false">
       </form>
-      ${done ? `<div class="feedback ${sess.typeOk ? "ok" : "no"}"><span class="t">${sess.typeOk ? t("Correct spelling!") : t("The right word is: {w}", { w: `<b>${esc(it.ans)}</b>` })}</span></div>
+      ${done ? `<div class="feedback ${sess.typeOk ? "ok" : "no"}"><span class="t">${sess.typeOk ? t("Correct spelling!") : t("The right answer is: {w}", { w: `<b>${esc(it.ans)}</b>` })}</span></div>
       <div class="answer"><span class="label">${t("Collocation")}</span><div class="big">${esc(it.p)} ${speakBtn(plain(it))}</div><p><span class="label">${t("In real life")}</span><br>${esc(it.x)}</p><p class="muted">${t("Say both sentences out loud. It helps you remember.")}</p></div>` : ""}`;
     if (done && sess.typeOk) {
       below = actions(t("How easy was it?"), `<div class="rate rate3">${[["Hard", 1, ""], ["Good", 2, "good"], ["Easy", 3, ""]].map(([n, r, cls]) =>
@@ -811,7 +816,7 @@ function studyPick(o) {
 }
 function studyCheck(val) {
   const it = BY_ID[sess.queue[0]];
-  sess.typeOk = val !== null && norm(val) === norm(it.ans);
+  sess.typeOk = val !== null && same(val, it.ans);
   sess.step = "done"; render();
   const n = document.querySelector('[data-rate="2"], [data-rate="0"]'); if (n) n.focus();
 }
@@ -890,7 +895,7 @@ function vQuiz() {
     }).join("")}</div>`;
   } else {
     body = `<form class="type-row" id="type-form" autocomplete="off">
-      <input id="type-input" aria-label="${t("Write the missing word")}" placeholder="${q.hint ? esc(it.ans[0]) + "…" : t("Write the missing word")}" ${answered ? `value="${esc(it.ans)}" disabled class="${q.ok ? "in-ok" : "in-show"}"` : ""} autocapitalize="off" spellcheck="false">
+      <input id="type-input" aria-label="${t("Write the missing words")}" placeholder="${q.hint ? esc(hintOf(it.ans)) : t("Write the missing words")}" ${answered ? `value="${esc(it.ans)}" disabled class="${q.ok ? "in-ok" : "in-show"}"` : ""} autocapitalize="off" spellcheck="false">
 </form>`;
   }
   const fb = answered ? `<div class="feedback ${q.ok ? "ok" : "no"}">
@@ -901,14 +906,14 @@ function vQuiz() {
     </div>` : "";
   const bar = answered ? actions("", `<button class="btn primary" data-act="quiz-next">${quiz.i === quiz.qs.length - 1 ? t("See result") : t("Next question")}</button>`, t("Keyboard: Enter"))
     : q.type === "pick" ? actions(t("Choose one answer above"), "", "")
-    : actions(q.hint ? t("Hint: the first letter is shown in the box") : "", `<button class="btn primary" type="submit" form="type-form">${t("Check")}</button>${q.hint ? "" : `<button type="button" class="btn" data-act="hint">${t("Hint")}</button>`}<button type="button" class="btn" data-act="reveal">${t("Show answer")}</button>`, t("Keyboard: Enter to check"));
+    : actions(q.hint ? t("Hint: the first letter of each word is shown in the box") : "", `<button class="btn primary" type="submit" form="type-form">${t("Check")}</button>${q.hint ? "" : `<button type="button" class="btn" data-act="hint">${t("Hint")}</button>`}<button type="button" class="btn" data-act="reveal">${t("Show answer")}</button>`, t("Keyboard: Enter to check"));
   return `<div class="study-head">
       <button class="back" data-act="quiz-change">← ${t("Stop")}</button>
       <div class="progress"><i style="width:${quiz.i / quiz.qs.length * 100}%"></i></div>
       <span class="muted" style="font-variant-numeric:tabular-nums">${quiz.i + 1} / ${quiz.qs.length}</span>
     </div>
     <article class="card">
-      <span class="label">${q.type === "pick" ? t("Which collocation has this meaning?") : t("Write the missing word")}</span>
+      <span class="label">${q.type === "pick" ? t("Which collocation has this meaning?") : t("Write the whole collocation")}</span>
       ${q.type === "pick" ? `<p class="sentence">“${esc(it.m)}”</p>` : `<p class="meaning">${esc(it.m)}${tr(it) ? `<br>${tr(it)}` : ""}</p><p class="sentence">${answered ? marked(it) : gapped(it)}</p>`}
       ${body}
       ${fb}
@@ -920,7 +925,7 @@ function answer(val) {
   if (val === null) { q.picked = ""; q.ok = false; } else {
   q.picked = val.trim();
   const target = q.type === "pick" ? it.p : it.ans;
-  q.ok = norm(q.picked) === norm(target);
+  q.ok = q.type === "pick" ? norm(q.picked) === norm(target) : same(q.picked, target);
   }
   if (!q.ok && S.cards[it.id]) { S.cards[it.id].due = today(); save(); }
   if (!q.ok && !S.cards[it.id]) { S.cards[it.id] = { iv: 0, ef: 2.5, reps: 0, lapses: 0, due: today() }; save(); }
