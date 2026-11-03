@@ -20,7 +20,16 @@ cat <<'HEAD'
 HEAD
 cat app.html
 cat <<'TAIL'
-<script>if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));</script>
+<script>
+if ("serviceWorker" in navigator) addEventListener("load", () => {
+  navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).then(reg => {
+    document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") reg.update().catch(() => {}); });
+  }).catch(() => {});
+  // When a new version takes over, reload once so it shows right away (not during a lesson).
+  let reloaded = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => { if (!reloaded && !document.body.classList.contains("task-mode")) { reloaded = true; location.reload(); } });
+});
+</script>
 </html>
 TAIL
 } > index.html
