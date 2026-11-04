@@ -126,7 +126,16 @@ button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px s
 
 /* Today */
 .hero { display: grid; gap: 34px; }
-.day-block { gap: 14px !important; }
+.day-card { --ink: #1d1a17; --fg: #1d1a17; --muted: #5e5546; --surface: #fffaf0; --mark: #ffe94d; --mark-fg: #1d1a17; position: relative; color: var(--ink); background: #fffaf0; border: 2.5px solid #1d1a17; border-radius: 26px 12px 30px 14px / 14px 30px 12px 26px; padding: 18px 18px 22px; display: grid; gap: 8px; justify-items: center; text-align: center; transform: rotate(-.8deg); box-shadow: 8px 9px 0 -2px var(--paper-2), 8px 9px 0 0 var(--soft); }
+.day-card .label { color: var(--muted); font-size: 1.25rem; }
+.day-card .hero-art { width: min(62%, 220px); aspect-ratio: 1.15; margin: 2px 0 4px; }
+.day-card .hero-art svg { width: 100%; height: 100%; display: block; }
+.day-card .ph { font-size: clamp(2.2rem, 11vw, 3rem); font-weight: 800; line-height: 1; letter-spacing: -.02em; background: linear-gradient(transparent 58%, #ffe94d 58%, #ffe94d 92%, transparent 92%); padding: 0 .12em; }
+.day-card .dc-ru { font-size: 1.1rem; font-weight: 700; color: #2f6fc8; }
+.day-card .dc-mn { color: var(--muted); font-size: .95rem; }
+.day-card .example { margin-top: 8px; text-align: left; justify-self: stretch; padding-top: 12px; border-top: 2px dashed #d8cba9; }
+.day-card .icon-btn { color: #1d1a17; }
+.day-card .dc-x { color: var(--muted); font-size: .95rem; text-align: left; justify-self: stretch; }
 .top-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; position: relative; }
 .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .stat { border: 2px solid var(--line); background: var(--surface); padding: 10px 12px; border-radius: var(--sk3); }
@@ -946,16 +955,16 @@ function vToday() {
       <h1 class="brand"><span>Word +<br>Partners</span><svg class="smile" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${DOODLES.smile}</svg></h1>
       ${doodle("star", "right:58px;top:2px", 22)}${doodle("star", "right:8px;top:34px", 18)}
     </div>
-    <div class="stack day-block">
-      <span class="label">${t("Collocation of the day")}</span>
-      <div class="word-day">
-        ${doodle("waves", "left:-6px;top:-14px", 26)}${doodle("dots", "right:-4px;top:-8px;color:#f0a53a", 30)}
-        <div class="art">${HERO_ART}</div>
-        <div><div class="ph">${esc(pick.p)}</div>${tr(pick) || `<p class="mn">${esc(pick.m)}</p>`}</div>
-      </div>
-      <div class="example rel"><p>${marked(pick)}</p>${speakBtn(plain(pick))}</div>
-      <p class="muted" style="font-size:.95rem"><i>${esc(pick.x)}</i></p>
-    </div>
+    <article class="day-card">
+      ${doodle("star", "right:14px;top:12px;color:#e0442f", 20)}${doodle("dots", "left:12px;bottom:14px;color:#f0a53a", 28)}
+      <span class="label">${t("Collocation of the day")} · ${pick.lv}</span>
+      <div class="hero-art">${HERO_ART}</div>
+      <h2 class="ph">${esc(pick.p)}</h2>
+      ${tr(pick) ? `<p class="dc-ru">${esc(pick.ru)}</p>` : ""}
+      <p class="dc-mn">${esc(pick.m)}</p>
+      <div class="example"><p>${marked(pick)}</p>${speakBtn(plain(pick))}</div>
+      <p class="dc-x"><i>${esc(pick.x)}</i></p>
+    </article>
     <div class="cta rel">
       ${doodle("arrowL", "left:2px;top:16px", 30)}
       <p><b style="font-family:var(--font-display);font-size:1.15rem">${total ? t("{n} for today", { n: total + " " + pl(total, "card", "cards", "карточка", "карточки", "карточек") }) : t("All done for today")}</b><br><span class="muted">${total ? t("{a} to review, {b} new", { a: due, b: nl }) : t("Come back tomorrow, or take a quiz to practise more.")}</span></p>
