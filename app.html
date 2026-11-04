@@ -315,10 +315,12 @@ body.task-mode .card.task { border: 0; background: none; box-shadow: none; paddi
 .task-title { display: grid; gap: 4px; }
 .task-title h1 { font-size: clamp(1.55rem, 7vw, 1.95rem); line-height: 1.12; }
 .task-title p { font-size: .98rem; }
-.art { display: flex; justify-content: center; height: clamp(84px, 21vh, 175px); flex: none; }
+.art { display: flex; justify-content: center; height: clamp(70px, 15vh, 140px); flex: none; }
 .art svg { height: 100%; width: auto; max-width: 100%; }
-.say { display: grid; gap: 6px; }
-.card.task .sentence { text-align: left; font-size: 1.2rem; line-height: 1.5; font-weight: 600; }
+.say { display: grid; gap: 12px; padding: 10px 0 6px; }
+body.task-mode .card.task .sentence { text-align: left; font-size: 1.3rem; line-height: 1.8; font-weight: 600; }
+.blank { color: transparent; border-bottom: 2px dashed var(--muted); padding: 0 .35em; margin: 0 .1em; box-decoration-break: clone; -webkit-box-decoration-break: clone; user-select: none; }
+.blank.on { color: var(--mark-fg); background: var(--mark); border-bottom-color: var(--mark); border-radius: 4px 4px 0 0; user-select: auto; }
 .say .hint { color: var(--muted); font-size: .96rem; }
 .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .tile { position: relative; overflow: hidden; isolation: isolate; min-height: 66px; border: 2px solid var(--line); border-radius: 14px 8px 16px 6px / 6px 16px 8px 14px; padding: 8px; font: 800 1.05rem/1.2 var(--font-display); color: #1d1a17; cursor: pointer; background: #fffaf0; display: grid; place-items: center; text-align: center; transition: transform .12s, opacity .2s; }
@@ -331,7 +333,12 @@ body.task-mode .card.task { border: 0; background: none; box-shadow: none; paddi
 .tile.right::after { content: "✓"; position: absolute; top: 2px; right: 8px; font-size: 1.2rem; color: #1d1a17; }
 .btn.primary.orange { color: #1d1a17; }
 .btn.primary.orange::before { background: #ef7a3c; }
-body.task-mode .card.task .answer .big { font-size: 1.5rem; }
+body.task-mode .card.task .answer .big { font-size: 1.35rem; }
+.card.task .feedback { padding: 8px 12px; gap: 2px; }
+.feedback.line { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; }
+.feedback.line .ru { flex-basis: 100%; }
+.feedback.line .icon-btn { padding: 2px; }
+.card.task .say { padding: 6px 0 2px; }
 @media (max-height: 700px) { .art { display: none; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
@@ -1080,6 +1087,8 @@ const ART_WRITE = `<svg viewBox="0 0 220 150" aria-hidden="true"><g filter="url(
     <path d="M36 128c10 4 22 4 34-2M30 116l6 4-6 4"/>
     <path d="M168 34l4 10M186 40l-8 6M160 50l10-2"/>
   </g></svg>`;
+// The gap holds the answer invisibly, so the line keeps its width when the answer appears.
+const blank = (it, show) => esc(it.e).replace(/\{(.+?)\}/, (m, a) => `<span class="blank ${show ? "on" : ""}" ${show ? "" : 'aria-label="blank"'}>${a}</span>`);
 const art = svg => `<div class="art">${svg}</div>`;
 
 // ---------- study session ----------
@@ -1124,17 +1133,17 @@ function vStudy() {
   if (sess.step === "pick") {
     const answered = sess.pickOk !== null;
     inner = `${taskTitle(t("Fill in the gap"), t("Choose one of the options"))}
-      ${answered ? "" : art(ART_THINK)}
-      <div class="say"><p class="sentence">${answered ? marked(it) : gapped(it)}</p><p class="hint">${esc(it.m)}</p></div>
+      ${art(ART_THINK)}
+      <div class="say"><p class="sentence">${blank(it, answered)}</p><p class="hint">${esc(it.m)}</p></div>
       ${tiles(sess.opts, sess.sel, answered, it.p, "data-ssel")}
-      ${answered ? `<div class="feedback ${sess.pickOk ? "ok" : "no"}"><span class="t">${sess.pickOk ? t("Correct!") : t("Here is the right collocation:")}</span><span class="row" style="gap:4px"><b>${esc(it.p)}</b> ${speakBtn(plain(it))}</span>${tr(it)}</div>` : ""}`;
+      ${answered ? `<div class="feedback line ${sess.pickOk ? "ok" : "no"}"><span class="t">${sess.pickOk ? t("Correct!") : t("Here is the right collocation:")}</span> <b>${esc(it.p)}</b>${speakBtn(plain(it))}${tr(it) ? `<span class="ru">${esc(it.ru)}</span>` : ""}</div>` : ""}`;
     below = answered ? actions("", `<button class="btn primary" data-act="to-type">${t("Next: write it")}</button>`, t("Keyboard: Enter"))
       : actions("", `<button class="btn primary" data-act="study-check-pick" ${sess.sel ? "" : "disabled"}>${t("Check")}</button>`, t("Keyboard: 1 · 2 · 3 · 4, then Enter"));
   } else {
     const done = sess.step === "done";
     inner = `${taskTitle(t("Write the collocation"), t("The whole phrase, as it is in the sentence"))}
-      ${done ? "" : art(ART_WRITE)}
-      <div class="say"><p class="sentence">${done ? marked(it) : gapped(it)}</p><p class="hint">${esc(it.m)}${tr(it) ? ` · ${tr(it)}` : ""}</p></div>
+      ${art(ART_WRITE)}
+      <div class="say"><p class="sentence">${blank(it, done)}</p><p class="hint">${esc(it.m)}${tr(it) ? ` · ${tr(it)}` : ""}</p></div>
       <form class="type-row" id="study-form" autocomplete="off">
         <input id="study-input" aria-label="${t("Write the missing words")}" placeholder="${t("Type the collocation…")}" ${done ? `value="${esc(it.ans)}" disabled class="${sess.typeOk ? "in-ok" : "in-show"}"` : ""} autocapitalize="off" autocorrect="off" spellcheck="false">
       </form>
@@ -1255,8 +1264,8 @@ function vQuiz() {
   return `${taskHead(`data-act="quiz-change"`, quiz.deck ? deckName(quiz.deck) : t("Quiz"), quiz.i + 1, quiz.qs.length)}
     <article class="card task">
       ${pick ? taskTitle(t("Fill in the gap"), t("Choose one of the options")) : taskTitle(t("Write the collocation"), t("The whole phrase, as it is in the sentence"))}
-      ${answered ? "" : art(pick ? ART_THINK : ART_WRITE)}
-      <div class="say"><p class="sentence">${answered ? marked(it) : gapped(it)}</p><p class="hint">${esc(it.m)}${!pick && tr(it) ? ` · ${tr(it)}` : ""}</p></div>
+      ${art(pick ? ART_THINK : ART_WRITE)}
+      <div class="say"><p class="sentence">${blank(it, answered)}</p><p class="hint">${esc(it.m)}${!pick && tr(it) ? ` · ${tr(it)}` : ""}</p></div>
       ${body}
       ${fb}
     </article>
