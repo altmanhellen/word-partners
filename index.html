@@ -316,6 +316,37 @@ body.task-mode .card { flex: 1; min-height: 0; overflow-y: auto; margin-right: 7
   .rate { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .options { grid-template-columns: 1fr; }
 }
+
+/* Task screens: no card box, big title, picture, sentence, painted option tiles */
+body.task-mode .card.task { border: 0; background: none; box-shadow: none; padding: 2px 0 6px; gap: 14px; margin: 0; border-radius: 0; align-content: start; }
+.task-head { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; align-items: end; gap: 12px; flex: none; }
+.task-head .x { border: 0; background: none; color: var(--ink); padding: 4px; cursor: pointer; display: inline-flex; align-self: center; }
+.task-head .x svg { width: 24px; height: 24px; }
+.th-mid { display: grid; gap: 6px; justify-items: center; min-width: 0; }
+.th-mid b { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.th-mid .progress { width: 100%; flex: none; height: 10px; }
+.th-n { font-size: .95rem; color: var(--ink); font-variant-numeric: tabular-nums; line-height: 10px; }
+.task-title { display: grid; gap: 4px; }
+.task-title h1 { font-size: clamp(1.55rem, 7vw, 1.95rem); line-height: 1.12; }
+.task-title p { font-size: .98rem; }
+.art { display: flex; justify-content: center; height: clamp(84px, 21vh, 175px); flex: none; }
+.art svg { height: 100%; width: auto; max-width: 100%; }
+.say { display: grid; gap: 6px; }
+.card.task .sentence { text-align: left; font-size: 1.2rem; line-height: 1.5; font-weight: 600; }
+.say .hint { color: var(--muted); font-size: .96rem; }
+.tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.tile { position: relative; overflow: hidden; isolation: isolate; min-height: 66px; border: 2px solid var(--line); border-radius: 14px 8px 16px 6px / 6px 16px 8px 14px; padding: 8px; font: 800 1.05rem/1.2 var(--font-display); color: #1d1a17; cursor: pointer; background: #fffaf0; display: grid; place-items: center; text-align: center; transition: transform .12s, opacity .2s; }
+.tile:nth-child(2) { transform: rotate(.6deg); } .tile:nth-child(3) { transform: rotate(-.5deg); }
+.tile .paint { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
+.tile span { background: rgba(255, 250, 240, .78); padding: 1px 8px; border-radius: 8px; }
+.tile[aria-pressed="true"] { outline: 3px solid var(--ink); outline-offset: 3px; transform: translateY(-2px) rotate(-.6deg); }
+.tiles.done .tile { cursor: default; opacity: .32; }
+.tiles.done .tile.right { opacity: 1; outline: 3px solid var(--good); outline-offset: 3px; }
+.tile.right::after { content: "✓"; position: absolute; top: 2px; right: 8px; font-size: 1.2rem; color: #1d1a17; }
+.btn.primary.orange { color: #1d1a17; }
+.btn.primary.orange::before { background: #ef7a3c; }
+body.task-mode .card.task .answer .big { font-size: 1.5rem; }
+@media (max-height: 700px) { .art { display: none; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 
@@ -749,7 +780,7 @@ function newIds(deck, n, lv) {
 // ---------- interface language ----------
 const lang = () => S.ui || (/^ru/i.test(navigator.language || "") ? "ru" : "en");
 const showRu = () => S.showRu !== false;
-const RU = {"Today": "Сегодня", "Words": "Слова", "Quiz": "Квиз", "Settings": "Настройки", "again soon": "скоро снова", "mo": "мес.", "Listen": "Слушать", "British": "британский", "American": "американский", "Australian": "австралийский", "Irish": "ирландский", "South African": "южноафриканский", "Indian": "индийский", "Canadian": "канадский", "New Zealand": "новозеландский", "All decks": "Все наборы", "Make": "Make", "Do": "Do", "Take": "Take", "Have": "Have", "Get": "Get", "Pay, keep, break & more": "Pay, keep, break и другие", "Adjective + noun": "Прилагательное + существительное", "Adverb + adjective": "Наречие + прилагательное", "Work & study": "Работа и учёба", "Time & money": "Время и деньги", "Go, come, say & talk": "Go, come, say и talk", "Going places and speaking": "Движение и речь", "Preposition phrases": "Фразы с предлогами", "on purpose, by accident": "on purpose, by accident", "Noun + noun": "Существительное + существительное", "traffic jam, screen time": "traffic jam, screen time", "Travel & health": "Путешествия и здоровье", "Trips, doctors, feeling well": "Поездки, врачи, самочувствие", "People, feelings & tech": "Люди, чувства и технологии", "Friends, love, phones, social media": "Друзья, любовь, телефоны, соцсети", "Verb + adverb": "Глагол + наречие", "work hard, sleep soundly": "work hard, sleep soundly", "Create or produce something": "Создавать, производить", "Tasks, jobs and activities": "Задачи, дела и занятия", "Actions you choose to do": "Действия, которые вы выбираете", "Meals, experiences, events": "Еда, впечатления, события", "Changes and results": "Изменения и результаты", "Other strong verb partners": "Другие глаголы с устойчивыми партнёрами", "heavy rain, strong coffee": "heavy rain, strong coffee", "highly recommended, wide awake": "highly recommended, wide awake", "Meetings, exams, careers": "Совещания, экзамены, карьера", "Spending, saving, wasting": "Тратить, копить, терять", "{a} / {b} started": "начато {a} из {b}", "{n} to review": "повторить: {n}", "Your level: {l}": "Ваш уровень: {l}", "Progress by level": "Прогресс по уровням", "Change": "Изменить", "Elementary": "Начальный", "Intermediate": "Средний", "Upper-intermediate": "Выше среднего", "Advanced": "Продвинутый", "You are ready for {l}!": "Вы готовы к уровню {l}!", "You have learned {p}% of the {l} collocations.": "Вы выучили {p}% коллокаций уровня {l}.", "Move to {l}": "Перейти на {l}", "A collocation counts as learned when you remember it for a week or more.": "Коллокация считается выученной, когда вы помните её неделю и больше.", "New cards come from your level first. When you have learned {p}% of your level, the app suggests the next one.": "Сначала идут новые карточки вашего уровня. Когда вы выучите {p}% своего уровня, приложение предложит следующий.", "You are learning in mixed order: new cards come from all levels. You can change this in Settings.": "Вы учите вперемешку: новые карточки идут со всех уровней. Это можно изменить в Настройках.", "Learn words the way native speakers put them together.": "Учите слова так, как их сочетают носители языка.", "collocations started": "коллокаций начато", "well known (3+ weeks)": "хорошо знаю (3+ недели)", "{n} for today": "{n} на сегодня", "All done for today": "На сегодня всё", "{a} to review, {b} new": "повторить: {a}, новых: {b}", "Come back tomorrow, or take a quiz to practise more.": "Возвращайтесь завтра или пройдите квиз, чтобы потренироваться ещё.", "Start studying": "Начать учить", "Take a quiz": "Пройти квиз", "Collocation of the day": "Коллокация дня", "Decks": "Наборы", "See all words": "Все слова", "Your settings": "Ваши настройки", "Language": "Язык", "Interface language": "Язык интерфейса", "Show Russian translation": "Показывать перевод на русский", "The translation appears under each collocation. In the “choose” step it appears only after you answer, so it does not give away the answer.": "Перевод показывается под каждой коллокацией. В шаге «Выбор» он появляется только после ответа, чтобы не подсказывать.", "Cards and voice": "Карточки и голос", "How to learn new cards": "Как учить новые карточки", "By level": "По уровням", "Mixed (all levels)": "Вперемешку (все уровни)", "Start with your level and move up step by step.": "Начинайте со своего уровня и поднимайтесь шаг за шагом.", "New cards come from all levels, in random order.": "Новые карточки идут со всех уровней в случайном порядке.", "Your level": "Ваш уровень", "{n} collocations": "коллокаций: {n}", "New cards per day": "Новых карточек в день", "Voice": "Голос", "iPhone voice from Settings": "Голос из настроек iPhone", "Speed": "Скорость", "Slow": "Медленно", "Normal": "Обычно", "Fast": "Быстро", "Test voice": "Проверить голос", "VOICE_HELP": "★ = голос лучшего качества. На iPhone можно бесплатно скачать более естественные голоса: Настройки → Универсальный доступ → Устный контент (в новых iOS: «Чтение и речь») → Голоса → English. Выберите голос с пометкой «Premium» или «Enhanced» и скачайте его. Затем закройте и снова откройте приложение. Выберите «Голос из настроек iPhone» с тем же акцентом (британский или американский) или выберите голос по имени.", "Reset my progress": "Сбросить прогресс", "Your progress is saved in this browser only. {a} collocations in {b} decks. Levels follow CEFR (A2 to C1).": "Прогресс сохраняется только в этом браузере. Коллокаций: {a}, наборов: {b}. Уровни по шкале CEFR (от A2 до C1).", "Choose a deck": "Выберите набор", "Open a deck to read every collocation with its meaning and an example. You can study or quiz one deck at a time.": "Откройте набор, чтобы посмотреть все коллокации со значением и примером. Можно учить или проходить квиз по одному набору.", "New": "Новая", "Learning": "Учу", "Known": "Знаю", "Study {n}": "Учить {n}", "Nothing to study today": "Сегодня учить нечего", "Quiz this deck": "Квиз по набору", "Filter by level": "Фильтр по уровню", "All": "Все", "In real life": "В жизни", "Session complete": "Занятие окончено", "Well done!": "Отлично!", "You studied {a}. Your streak is {b}.": "Вы прошли {a}. Вы занимаетесь {b} подряд.", "Practise with a quiz": "Потренироваться в квизе", "Back to Today": "Вернуться на «Сегодня»", "Steps": "Шаги", "Choose": "Выбор", "Write": "Письмо", "Which collocation has this meaning?": "Какая коллокация имеет это значение?", "Correct!": "Правильно!", "Here is the right collocation:": "Правильная коллокация:", "Next: write it": "Дальше: напишите её", "Keyboard: Enter": "Клавиатура: Enter", "Choose one answer above": "Выберите один ответ выше", "Keyboard: 1 · 2 · 3 · 4": "Клавиатура: 1 · 2 · 3 · 4", "Write the missing word": "Напишите пропущенное слово", "Correct spelling!": "Всё написано правильно!", "The right word is: {w}": "Правильное слово: {w}", "Collocation": "Коллокация", "Say both sentences out loud. It helps you remember.": "Произнесите оба предложения вслух. Так легче запомнить.", "How easy was it?": "Насколько было легко?", "Hard": "Трудно", "Good": "Хорошо", "Easy": "Легко", "Keyboard: 1 Hard · 2 Good · 3 Easy": "Клавиатура: 1 Трудно · 2 Хорошо · 3 Легко", "This card will come back soon": "Эта карточка скоро вернётся", "Continue": "Продолжить", "Check": "Проверить", "I don't know": "Не знаю", "Keyboard: Enter to check": "Клавиатура: Enter — проверить", "Stop": "Стоп", "Progress": "Прогресс", "{n} left": "осталось {n}", "review": "повтор", "new": "новая", "Remember the right word partner": "Запомните правильную пару слов", "QUIZ_INTRO": "10 вопросов. Сначала вы выбираете коллокацию, которая подходит к значению (4 вопроса). Потом сами пишете всю коллокацию целиком (6 вопросов), а приложение проверяет написание. Вы видите только правильный английский. Всё, что вы пропустите, вернётся на следующем занятии.", "Deck": "Набор", "All decks (mixed)": "Все наборы (вперемешку)", "Level": "Уровень", "All levels": "Все уровни", "Start quiz": "Начать квиз", "Perfect score!": "Идеальный результат!", "Great work!": "Отличная работа!", "Good practice.": "Хорошая тренировка.", "Keep going. Every mistake teaches you something.": "Продолжайте. Каждая ошибка чему-то учит.", "Result": "Результат", "Practise these again": "Повторите эти", "New quiz": "Новый квиз", "Change deck": "Сменить набор", "The right collocation is marked in green.": "Правильная коллокация отмечена зелёным.", "See result": "Посмотреть результат", "Next question": "Следующий вопрос", "Hint: the first letter is shown in the box": "Подсказка: первая буква показана в поле", "Hint": "Подсказка", "Show answer": "Показать ответ", "Delete all your progress?": "Удалить весь прогресс?", "This cannot be undone.": "Это нельзя отменить.", "Yes, reset": "Да, сбросить", "Cancel": "Отмена", "Write the missing words": "Напишите пропущенные слова", "Write the whole collocation": "Напишите коллокацию целиком", "Hint: the first letter of each word is shown in the box": "Подсказка: в поле показаны первые буквы каждого слова", "The right answer is: {w}": "Правильный ответ: {w}", "Choose level {l}": "Выбрать уровень {l}", "Tap a level to choose it.": "Нажмите на уровень, чтобы выбрать его.", "Correct! In this sentence: {w}": "Правильно! В этом предложении: {w}"};
+const RU = {"Today": "Сегодня", "Words": "Слова", "Quiz": "Квиз", "Settings": "Настройки", "again soon": "скоро снова", "mo": "мес.", "Listen": "Слушать", "British": "британский", "American": "американский", "Australian": "австралийский", "Irish": "ирландский", "South African": "южноафриканский", "Indian": "индийский", "Canadian": "канадский", "New Zealand": "новозеландский", "All decks": "Все наборы", "Make": "Make", "Do": "Do", "Take": "Take", "Have": "Have", "Get": "Get", "Pay, keep, break & more": "Pay, keep, break и другие", "Adjective + noun": "Прилагательное + существительное", "Adverb + adjective": "Наречие + прилагательное", "Work & study": "Работа и учёба", "Time & money": "Время и деньги", "Go, come, say & talk": "Go, come, say и talk", "Going places and speaking": "Движение и речь", "Preposition phrases": "Фразы с предлогами", "on purpose, by accident": "on purpose, by accident", "Noun + noun": "Существительное + существительное", "traffic jam, screen time": "traffic jam, screen time", "Travel & health": "Путешествия и здоровье", "Trips, doctors, feeling well": "Поездки, врачи, самочувствие", "People, feelings & tech": "Люди, чувства и технологии", "Friends, love, phones, social media": "Друзья, любовь, телефоны, соцсети", "Verb + adverb": "Глагол + наречие", "work hard, sleep soundly": "work hard, sleep soundly", "Create or produce something": "Создавать, производить", "Tasks, jobs and activities": "Задачи, дела и занятия", "Actions you choose to do": "Действия, которые вы выбираете", "Meals, experiences, events": "Еда, впечатления, события", "Changes and results": "Изменения и результаты", "Other strong verb partners": "Другие глаголы с устойчивыми партнёрами", "heavy rain, strong coffee": "heavy rain, strong coffee", "highly recommended, wide awake": "highly recommended, wide awake", "Meetings, exams, careers": "Совещания, экзамены, карьера", "Spending, saving, wasting": "Тратить, копить, терять", "{a} / {b} started": "начато {a} из {b}", "{n} to review": "повторить: {n}", "Your level: {l}": "Ваш уровень: {l}", "Progress by level": "Прогресс по уровням", "Change": "Изменить", "Elementary": "Начальный", "Intermediate": "Средний", "Upper-intermediate": "Выше среднего", "Advanced": "Продвинутый", "You are ready for {l}!": "Вы готовы к уровню {l}!", "You have learned {p}% of the {l} collocations.": "Вы выучили {p}% коллокаций уровня {l}.", "Move to {l}": "Перейти на {l}", "A collocation counts as learned when you remember it for a week or more.": "Коллокация считается выученной, когда вы помните её неделю и больше.", "New cards come from your level first. When you have learned {p}% of your level, the app suggests the next one.": "Сначала идут новые карточки вашего уровня. Когда вы выучите {p}% своего уровня, приложение предложит следующий.", "You are learning in mixed order: new cards come from all levels. You can change this in Settings.": "Вы учите вперемешку: новые карточки идут со всех уровней. Это можно изменить в Настройках.", "Learn words the way native speakers put them together.": "Учите слова так, как их сочетают носители языка.", "collocations started": "коллокаций начато", "well known (3+ weeks)": "хорошо знаю (3+ недели)", "{n} for today": "{n} на сегодня", "All done for today": "На сегодня всё", "{a} to review, {b} new": "повторить: {a}, новых: {b}", "Come back tomorrow, or take a quiz to practise more.": "Возвращайтесь завтра или пройдите квиз, чтобы потренироваться ещё.", "Start studying": "Начать учить", "Take a quiz": "Пройти квиз", "Collocation of the day": "Коллокация дня", "Decks": "Наборы", "See all words": "Все слова", "Your settings": "Ваши настройки", "Language": "Язык", "Interface language": "Язык интерфейса", "Show Russian translation": "Показывать перевод на русский", "The translation appears under each collocation. In the “choose” step it appears only after you answer, so it does not give away the answer.": "Перевод показывается под каждой коллокацией. В шаге «Выбор» он появляется только после ответа, чтобы не подсказывать.", "Cards and voice": "Карточки и голос", "How to learn new cards": "Как учить новые карточки", "By level": "По уровням", "Mixed (all levels)": "Вперемешку (все уровни)", "Start with your level and move up step by step.": "Начинайте со своего уровня и поднимайтесь шаг за шагом.", "New cards come from all levels, in random order.": "Новые карточки идут со всех уровней в случайном порядке.", "Your level": "Ваш уровень", "{n} collocations": "коллокаций: {n}", "New cards per day": "Новых карточек в день", "Voice": "Голос", "iPhone voice from Settings": "Голос из настроек iPhone", "Speed": "Скорость", "Slow": "Медленно", "Normal": "Обычно", "Fast": "Быстро", "Test voice": "Проверить голос", "VOICE_HELP": "★ = голос лучшего качества. На iPhone можно бесплатно скачать более естественные голоса: Настройки → Универсальный доступ → Устный контент (в новых iOS: «Чтение и речь») → Голоса → English. Выберите голос с пометкой «Premium» или «Enhanced» и скачайте его. Затем закройте и снова откройте приложение. Выберите «Голос из настроек iPhone» с тем же акцентом (британский или американский) или выберите голос по имени.", "Reset my progress": "Сбросить прогресс", "Your progress is saved in this browser only. {a} collocations in {b} decks. Levels follow CEFR (A2 to C1).": "Прогресс сохраняется только в этом браузере. Коллокаций: {a}, наборов: {b}. Уровни по шкале CEFR (от A2 до C1).", "Choose a deck": "Выберите набор", "Open a deck to read every collocation with its meaning and an example. You can study or quiz one deck at a time.": "Откройте набор, чтобы посмотреть все коллокации со значением и примером. Можно учить или проходить квиз по одному набору.", "New": "Новая", "Learning": "Учу", "Known": "Знаю", "Study {n}": "Учить {n}", "Nothing to study today": "Сегодня учить нечего", "Quiz this deck": "Квиз по набору", "Filter by level": "Фильтр по уровню", "All": "Все", "In real life": "В жизни", "Session complete": "Занятие окончено", "Well done!": "Отлично!", "You studied {a}. Your streak is {b}.": "Вы прошли {a}. Вы занимаетесь {b} подряд.", "Practise with a quiz": "Потренироваться в квизе", "Back to Today": "Вернуться на «Сегодня»", "Steps": "Шаги", "Choose": "Выбор", "Write": "Письмо", "Which collocation has this meaning?": "Какая коллокация имеет это значение?", "Correct!": "Правильно!", "Here is the right collocation:": "Правильная коллокация:", "Next: write it": "Дальше: напишите её", "Keyboard: Enter": "Клавиатура: Enter", "Choose one answer above": "Выберите один ответ выше", "Keyboard: 1 · 2 · 3 · 4": "Клавиатура: 1 · 2 · 3 · 4", "Write the missing word": "Напишите пропущенное слово", "Correct spelling!": "Всё написано правильно!", "The right word is: {w}": "Правильное слово: {w}", "Collocation": "Коллокация", "Say both sentences out loud. It helps you remember.": "Произнесите оба предложения вслух. Так легче запомнить.", "How easy was it?": "Насколько было легко?", "Hard": "Трудно", "Good": "Хорошо", "Easy": "Легко", "Keyboard: 1 Hard · 2 Good · 3 Easy": "Клавиатура: 1 Трудно · 2 Хорошо · 3 Легко", "This card will come back soon": "Эта карточка скоро вернётся", "Continue": "Продолжить", "Check": "Проверить", "I don't know": "Не знаю", "Keyboard: Enter to check": "Клавиатура: Enter — проверить", "Stop": "Стоп", "Progress": "Прогресс", "{n} left": "осталось {n}", "review": "повтор", "new": "новая", "Remember the right word partner": "Запомните правильную пару слов", "QUIZ_INTRO": "10 вопросов. Сначала вы выбираете коллокацию, которая подходит к значению (4 вопроса). Потом сами пишете всю коллокацию целиком (6 вопросов), а приложение проверяет написание. Вы видите только правильный английский. Всё, что вы пропустите, вернётся на следующем занятии.", "Deck": "Набор", "All decks (mixed)": "Все наборы (вперемешку)", "Level": "Уровень", "All levels": "Все уровни", "Start quiz": "Начать квиз", "Perfect score!": "Идеальный результат!", "Great work!": "Отличная работа!", "Good practice.": "Хорошая тренировка.", "Keep going. Every mistake teaches you something.": "Продолжайте. Каждая ошибка чему-то учит.", "Result": "Результат", "Practise these again": "Повторите эти", "New quiz": "Новый квиз", "Change deck": "Сменить набор", "The right collocation is marked in green.": "Правильная коллокация отмечена зелёным.", "See result": "Посмотреть результат", "Next question": "Следующий вопрос", "Hint: the first letter is shown in the box": "Подсказка: первая буква показана в поле", "Hint": "Подсказка", "Show answer": "Показать ответ", "Delete all your progress?": "Удалить весь прогресс?", "This cannot be undone.": "Это нельзя отменить.", "Yes, reset": "Да, сбросить", "Cancel": "Отмена", "Write the missing words": "Напишите пропущенные слова", "Write the whole collocation": "Напишите коллокацию целиком", "Hint: the first letter of each word is shown in the box": "Подсказка: в поле показаны первые буквы каждого слова", "The right answer is: {w}": "Правильный ответ: {w}", "Choose level {l}": "Выбрать уровень {l}", "Tap a level to choose it.": "Нажмите на уровень, чтобы выбрать его.", "Correct! In this sentence: {w}": "Правильно! В этом предложении: {w}", "Fill in the gap": "Заполните пропуск", "Choose one of the options": "Выберите один из вариантов", "Write the collocation": "Впишите коллокацию", "The whole phrase, as it is in the sentence": "Целиком, как в предложении", "Type the collocation…": "Введите коллокацию…", "Keyboard: 1 · 2 · 3 · 4, then Enter": "Клавиатура: 1 · 2 · 3 · 4, потом Enter"};
 const EN = { VOICE_HELP: "★ = better quality voice. On iPhone you can download more natural voices for free: Settings → Accessibility → Spoken Content (in newer iOS: Read & Speak) → Voices → English. Choose a voice marked “Premium” or “Enhanced” and download it. Then close and reopen this app. Choose “iPhone voice from Settings” with the same accent (British or American) to use it, or pick a voice by name.", QUIZ_INTRO: "10 questions. First you choose the collocation that matches the meaning (4 questions). Then you write the whole collocation yourself (6 questions), and the app checks your spelling. You only ever see correct English. Anything you miss comes back in your next study session." };
 const t = (s, v = {}) => ((lang() === "ru" && RU[s]) || EN[s] || s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m));
 // Plural: English one/other; Russian one/few/many.
@@ -1016,6 +1047,55 @@ function vDeck(id) {
   </div>`;
 }
 
+// ---------- task screens (choose / write) ----------
+const closeSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.8 18.4 18.3M18.2 5.6 5.7 18.4"/></svg>';
+const taskHead = (closeAttrs, title, n, total) => `<div class="task-head">
+    <button class="x" ${closeAttrs} aria-label="${t("Stop")}">${closeSvg}</button>
+    <div class="th-mid"><b>${esc(title)}</b><div class="progress" aria-label="${t("Progress")}"><i style="width:${Math.round((n - 1) / total * 100)}%"></i></div></div>
+    <span class="th-n">${n} / ${total}</span>
+  </div>`;
+const taskTitle = (h, sub) => `<div class="task-title"><h1>${h}</h1><p class="muted">${sub}</p></div>`;
+// Options are painted tiles, each with its own colour. They are always real, correct collocations.
+function tilePaint(k) {
+  const [a, b] = PAINT[k % PAINT.length], kind = k % 4;
+  let m = "";
+  if (kind === 0) m = `<path d="M8 16c14-10 22 6 34-2M150 44c-10 8-4 18 6 12s10 6 18-2" stroke="${b}" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+  else if (kind === 1) for (let i = 0; i < 9; i++) m += `<path d="M${i * 24 - 10} 70 L${i * 24 + 30} -6" stroke="${b}" stroke-width="3" opacity=".7"/>`;
+  else if (kind === 2) m = `<path d="M10 14l6-6 6 6 6-6M140 58c6-10 14-10 20 0s14 10 20 0" stroke="${b}" stroke-width="3" fill="none" stroke-linecap="round"/><g fill="${b}"><circle cx="170" cy="14" r="3"/><circle cx="180" cy="22" r="2.4"/></g>`;
+  else m = `<path d="M-4 22C40 8 90 34 204 18M-4 52C60 40 120 64 204 48" stroke="${b}" stroke-width="5" fill="none" stroke-linecap="round" opacity=".75"/>`;
+  return `<svg class="paint" viewBox="0 0 200 64" preserveAspectRatio="none" aria-hidden="true"><g filter="url(#rough)"><rect x="-6" y="-6" width="212" height="76" fill="${a}"/>${m}<path d="M14 10q24-8 46 2" stroke="#fff" stroke-width="2.5" fill="none" opacity=".55" stroke-linecap="round"/></g></svg>`;
+}
+const tiles = (opts, sel, answered, right, attr) => `<div class="tiles ${answered ? "done" : ""}">${opts.map((o, n) =>
+  `<button class="tile ${answered && o === right ? "right" : ""}" ${attr}="${esc(o)}" aria-pressed="${!answered && o === sel}" ${answered ? "disabled" : ""}>${tilePaint(n)}<span>${esc(o)}</span></button>`).join("")}</div>`;
+const ART_THINK = `<svg viewBox="0 0 220 150" aria-hidden="true"><g filter="url(#rough)">
+  <path d="M30 60c4-34 50-50 86-40 30 8 40 40 26 64-14 26-60 34-88 20C34 94 28 80 30 60z" fill="#7fcac4"/>
+  <path d="M140 50c16-16 52-12 62 8 10 22-6 44-28 46-22 2-44-12-44-30 0-10 4-18 10-24z" fill="#f8cf3e"/>
+  <path d="M22 108c12-16 44-18 60-6 14 10 10 30-6 38-18 8-46 4-54-10-4-8-4-16 0-22z" fill="#f2834a"/></g>
+  <g fill="none" stroke="#1d1a17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M78 150c0-26 14-40 34-42h16c22 2 36 16 36 42" fill="#2f6fc8"/>
+    <path d="M100 92c-14-4-20-20-16-36 4-16 18-24 32-22 16 2 26 16 24 32-2 18-18 30-40 26z" fill="#f2a66b"/>
+    <path d="M86 58c-4-14 6-28 22-30 14-2 28 4 32 16-8-4-14-2-18 2-6-6-16-6-22 0-4 4-10 8-14 12z" fill="#2c5fb3"/>
+    <path d="M108 66h.1M126 64h.1"/><path d="M112 80c4 2 8 2 12-1"/>
+    <path d="M96 128c2-14 10-26 22-28 6-1 10 4 8 9l-6 10" fill="#f2a66b"/>
+    <path d="M44 34c0-8 12-10 14-2 2 6-6 8-6 14M52 54h.1"/>
+    <path d="M160 28c4-10 22-12 28-2 6 10-4 18-14 16l-8 6 2-8c-6-2-10-6-8-12z"/>
+    <path d="M168 30c4 4 8 4 12 0" stroke="#2f6fc8"/>
+  </g></svg>`;
+const ART_WRITE = `<svg viewBox="0 0 220 150" aria-hidden="true"><g filter="url(#rough)">
+  <path d="M40 70c2-36 46-56 84-46 34 10 46 42 30 70-16 28-62 34-90 18C42 102 38 88 40 70z" fill="#f8cf3e"/>
+  <path d="M150 90c12-16 46-14 56 4 8 16-4 36-24 38-22 2-40-12-36-28 0-6 2-10 4-14z" fill="#b79ae6"/></g>
+  <g fill="none" stroke="#1d1a17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M70 150c0-24 14-38 32-40h16c20 2 34 16 34 40" fill="#7fcac4"/>
+    <path d="M94 94c-14-4-18-20-14-34 4-14 16-22 30-20 16 2 24 16 22 30-2 18-16 28-38 24z" fill="#f2a66b"/>
+    <path d="M80 60c-2-16 10-26 24-26 16 0 28 10 28 24-6-6-14-6-20-2-6-4-14-4-20 0-4 2-8 4-12 4z" fill="#e0442f"/>
+    <path d="M100 70c2 2 4 2 6 0M118 69c2 2 4 2 6 0"/><path d="M106 84c4 3 9 3 13 0"/>
+    <path d="M140 132l40-54 10 7-40 54-13 5z" fill="#f2834a"/><path d="M180 78l5-7 10 7-5 7"/>
+    <path d="M122 140c6-6 14-8 20-6" fill="#f2a66b"/>
+    <path d="M36 128c10 4 22 4 34-2M30 116l6 4-6 4"/>
+    <path d="M168 34l4 10M186 40l-8 6M160 50l10-2"/>
+  </g></svg>`;
+const art = svg => `<div class="art">${svg}</div>`;
+
 // ---------- study session ----------
 let sess = null;
 function startStudy(deck, lv) {
@@ -1037,7 +1117,7 @@ const hintOf = ans => ans.split(" ").map(w => w[0] + "…").join(" ");
 function setCard() {
   if (!sess.queue.length) return;
   const it = BY_ID[sess.queue[0]];
-  sess.step = "pick"; sess.pickOk = null; sess.typeOk = null;
+  sess.step = "pick"; sess.pickOk = null; sess.typeOk = null; sess.sel = null;
   sess.opts = pickOptions(it, ITEMS.filter(i => i.d === it.d));
 }
 function vStudy() {
@@ -1052,49 +1132,39 @@ function vStudy() {
   }
   const it = BY_ID[sess.queue[0]];
   const c = S.cards[it.id];
-  const pct = Math.round(sess.done / (sess.done + sess.queue.length) * 100);
-  const steps = `<div class="steps" aria-label="${t("Steps")}">
-      <span class="${sess.step === "pick" ? "on" : "done"}">1 · ${t("Choose")}</span>
-      <span class="${sess.step === "type" ? "on" : sess.step === "done" ? "done" : ""}">2 · ${t("Write")}</span>
-    </div>`;
+  const n = sess.done + 1, total = sess.done + sess.queue.length;
+  const close = `data-go="${sess.deck ? "deck" : "today"}" ${sess.deck ? `data-deck="${sess.deck}"` : ""}`;
   let inner = "", below = "";
   if (sess.step === "pick") {
     const answered = sess.pickOk !== null;
-    inner = `<span class="q">${t("Which collocation has this meaning?")}</span>
-      <p class="sentence note">${esc(it.m)}</p>
-      <div class="options">${sess.opts.map((o, n) =>
-        `<button class="opt ${answered && o === it.p ? "right" : ""}" data-sopt="${esc(o)}" ${answered ? "disabled" : ""}><span class="k">${n + 1}</span> ${esc(o)}</button>`).join("")}</div>
-      ${answered ? `<div class="feedback ${sess.pickOk ? "ok" : "no"}"><span class="t">${sess.pickOk ? t("Correct!") : t("Here is the right collocation:")}</span><span class="row" style="gap:4px"><b>${esc(it.p)}</b> ${speakBtn(it.p)}</span>${tr(it)}</div>` : ""}`;
+    inner = `${taskTitle(t("Fill in the gap"), t("Choose one of the options"))}
+      ${answered ? "" : art(ART_THINK)}
+      <div class="say"><p class="sentence">${answered ? marked(it) : gapped(it)}</p><p class="hint">${esc(it.m)}</p></div>
+      ${tiles(sess.opts, sess.sel, answered, it.p, "data-ssel")}
+      ${answered ? `<div class="feedback ${sess.pickOk ? "ok" : "no"}"><span class="t">${sess.pickOk ? t("Correct!") : t("Here is the right collocation:")}</span><span class="row" style="gap:4px"><b>${esc(it.p)}</b> ${speakBtn(plain(it))}</span>${tr(it)}</div>` : ""}`;
     below = answered ? actions("", `<button class="btn primary" data-act="to-type">${t("Next: write it")}</button>`, t("Keyboard: Enter"))
-      : actions(t("Choose one answer above"), "", t("Keyboard: 1 · 2 · 3 · 4"));
+      : actions("", `<button class="btn primary" data-act="study-check-pick" ${sess.sel ? "" : "disabled"}>${t("Check")}</button>`, t("Keyboard: 1 · 2 · 3 · 4, then Enter"));
   } else {
     const done = sess.step === "done";
-    inner = `<span class="q">${t("Write the whole collocation")}</span>
-      <p class="meaning">${esc(it.m)}${tr(it) ? `<br>${tr(it)}` : ""}</p>
-      <p class="sentence">${done ? marked(it) : gapped(it)}</p>
+    inner = `${taskTitle(t("Write the collocation"), t("The whole phrase, as it is in the sentence"))}
+      ${done ? "" : art(ART_WRITE)}
+      <div class="say"><p class="sentence">${done ? marked(it) : gapped(it)}</p><p class="hint">${esc(it.m)}${tr(it) ? ` · ${tr(it)}` : ""}</p></div>
       <form class="type-row" id="study-form" autocomplete="off">
-        <input id="study-input" aria-label="${t("Write the missing words")}" placeholder="${t("Write the missing words")}" ${done ? `value="${esc(it.ans)}" disabled class="${sess.typeOk ? "in-ok" : "in-show"}"` : ""} autocapitalize="off" autocorrect="off" spellcheck="false">
+        <input id="study-input" aria-label="${t("Write the missing words")}" placeholder="${t("Type the collocation…")}" ${done ? `value="${esc(it.ans)}" disabled class="${sess.typeOk ? "in-ok" : "in-show"}"` : ""} autocapitalize="off" autocorrect="off" spellcheck="false">
       </form>
       ${done ? `<div class="feedback ${sess.typeOk ? "ok" : "no"}"><span class="t">${sess.typeOk ? (sess.otherForm ? t("Correct! In this sentence: {w}", { w: `<b>${esc(it.ans)}</b>` }) : t("Correct spelling!")) : t("The right answer is: {w}", { w: `<b>${esc(it.ans)}</b>` })}</span></div>
-      <div class="answer"><div class="big">${esc(it.p)} ${speakBtn(plain(it))}</div><p><span class="label">${t("In real life")}</span><br>${esc(it.x)}</p><p class="muted">${t("Say both sentences out loud. It helps you remember.")}</p></div>` : ""}`;
+      <div class="answer"><div class="big">${esc(it.p)} ${speakBtn(plain(it))}</div><p><span class="label">${t("In real life")}</span><br>${esc(it.x)}</p></div>` : ""}`;
     if (done && sess.typeOk) {
       below = actions(t("How easy was it?"), `<div class="rate rate3">${[["Hard", 1, ""], ["Good", 2, "good"], ["Easy", 3, ""]].map(([n, r, cls]) =>
         `<button class="${cls}" data-rate="${r}">${t(n)}<small>${label(next(c, r).iv)}</small></button>`).join("")}</div>`, t("Keyboard: 1 Hard · 2 Good · 3 Easy"));
     } else if (done) {
       below = actions(t("This card will come back soon"), `<button class="btn primary" data-rate="0">${t("Continue")}</button>`, t("Keyboard: Enter"));
     } else {
-      below = actions("", `<button class="btn primary" type="submit" form="study-form">${t("Check")}</button><button type="button" class="btn" data-act="study-reveal">${t("I don't know")}</button>`, t("Keyboard: Enter to check"));
+      below = actions("", `<button class="btn primary orange" type="submit" form="study-form">${t("Check")}</button><button type="button" class="btn" data-act="study-reveal">${t("I don't know")}</button>`, t("Keyboard: Enter to check"));
     }
   }
-  return `<div class="study-head">
-      <button class="back" data-go="${sess.deck ? "deck" : "today"}" ${sess.deck ? `data-deck="${sess.deck}"` : ""}>← ${t("Stop")}</button>
-      <div class="progress" aria-label="${t("Progress")} ${pct}%"><i style="width:${pct}%"></i></div>
-      <span class="muted" style="font-variant-numeric:tabular-nums">${t("{n} left", { n: sess.queue.length })}</span>
-    </div>
-    <article class="card">
-      <div class="row" style="justify-content:space-between">${steps}<span class="label">${esc(deckName(it.d))} · ${it.lv} · ${c ? t("review") : t("new")}</span></div>
-      ${inner}
-    </article>
+  return `${taskHead(close, deckName(it.d), n, total)}
+    <article class="card task">${inner}</article>
     ${below}`;
 }
 function studyPick(o) {
@@ -1182,35 +1252,25 @@ function vQuiz() {
       <div class="row"><button class="btn primary" data-act="quiz-again">${t("New quiz")}</button><button class="btn" data-act="quiz-change">${t("Change deck")}</button></div>
     </section>`;
   }
-  const q = quiz.qs[quiz.i], it = BY_ID[q.id], answered = q.picked !== null;
-  let body;
-  if (q.type === "pick") {
-    body = `<div class="options">${q.opts.map(o => {
-      const cls = answered && o === it.p ? "right" : "";
-      return `<button class="opt ${cls}" data-opt="${esc(o)}" ${answered ? "disabled" : ""}>${esc(o)}</button>`;
-    }).join("")}</div>`;
-  } else {
-    body = `<form class="type-row" id="type-form" autocomplete="off">
-      <input id="type-input" aria-label="${t("Write the missing words")}" placeholder="${q.hint ? esc(hintOf(it.ans)) : t("Write the missing words")}" ${answered ? `value="${esc(it.ans)}" disabled class="${q.ok ? "in-ok" : "in-show"}"` : ""} autocapitalize="off" spellcheck="false">
+  const q = quiz.qs[quiz.i], it = BY_ID[q.id], answered = q.picked !== null, pick = q.type === "pick";
+  const body = pick ? tiles(q.opts, q.sel, answered, it.p, "data-qsel")
+    : `<form class="type-row" id="type-form" autocomplete="off">
+      <input id="type-input" aria-label="${t("Write the missing words")}" placeholder="${q.hint ? esc(hintOf(it.ans)) : t("Type the collocation…")}" ${answered ? `value="${esc(it.ans)}" disabled class="${q.ok ? "in-ok" : "in-show"}"` : ""} autocapitalize="off" autocorrect="off" spellcheck="false">
 </form>`;
-  }
   const fb = answered ? `<div class="feedback ${q.ok ? "ok" : "no"}">
-      <span class="t">${q.ok ? (q.otherForm ? t("Correct! In this sentence: {w}", { w: `<b>${esc(it.ans)}</b>` }) : t("Correct!")) : q.type === "pick" ? t("The right collocation is marked in green.") : t("Here is the right collocation:")}</span>
-      ${q.type === "pick" ? "" : `<span class="row" style="gap:4px"><b style="font-size:1.15rem">${esc(it.p)}</b> ${speakBtn(plain(it))}</span>`}
+      <span class="t">${q.ok ? (q.otherForm ? t("Correct! In this sentence: {w}", { w: `<b>${esc(it.ans)}</b>` }) : t("Correct!")) : t("Here is the right collocation:")}</span>
+      <span class="row" style="gap:4px"><b style="font-size:1.1rem">${esc(it.p)}</b> ${speakBtn(plain(it))}</span>
       ${tr(it)}
       <span class="muted"><i>${esc(it.x)}</i></span>
     </div>` : "";
   const bar = answered ? actions("", `<button class="btn primary" data-act="quiz-next">${quiz.i === quiz.qs.length - 1 ? t("See result") : t("Next question")}</button>`, t("Keyboard: Enter"))
-    : q.type === "pick" ? actions(t("Choose one answer above"), "", "")
-    : actions(q.hint ? t("Hint: the first letter of each word is shown in the box") : "", `<button class="btn primary" type="submit" form="type-form">${t("Check")}</button>${q.hint ? "" : `<button type="button" class="btn" data-act="hint">${t("Hint")}</button>`}<button type="button" class="btn" data-act="reveal">${t("Show answer")}</button>`, t("Keyboard: Enter to check"));
-  return `<div class="study-head">
-      <button class="back" data-act="quiz-change">← ${t("Stop")}</button>
-      <div class="progress"><i style="width:${quiz.i / quiz.qs.length * 100}%"></i></div>
-      <span class="muted" style="font-variant-numeric:tabular-nums">${quiz.i + 1} / ${quiz.qs.length}</span>
-    </div>
-    <article class="card">
-      <span class="q">${q.type === "pick" ? t("Which collocation has this meaning?") : t("Write the whole collocation")}</span>
-      ${q.type === "pick" ? `<p class="sentence note">${esc(it.m)}</p>` : `<p class="meaning">${esc(it.m)}${tr(it) ? `<br>${tr(it)}` : ""}</p><p class="sentence">${answered ? marked(it) : gapped(it)}</p>`}
+    : pick ? actions("", `<button class="btn primary" data-act="quiz-check-pick" ${q.sel ? "" : "disabled"}>${t("Check")}</button>`, "")
+    : actions(q.hint ? t("Hint: the first letter of each word is shown in the box") : "", `<button class="btn primary orange" type="submit" form="type-form">${t("Check")}</button>${q.hint ? "" : `<button type="button" class="btn" data-act="hint">${t("Hint")}</button>`}<button type="button" class="btn" data-act="reveal">${t("Show answer")}</button>`, t("Keyboard: Enter to check"));
+  return `${taskHead(`data-act="quiz-change"`, quiz.deck ? deckName(quiz.deck) : t("Quiz"), quiz.i + 1, quiz.qs.length)}
+    <article class="card task">
+      ${pick ? taskTitle(t("Fill in the gap"), t("Choose one of the options")) : taskTitle(t("Write the collocation"), t("The whole phrase, as it is in the sentence"))}
+      ${answered ? "" : art(pick ? ART_THINK : ART_WRITE)}
+      <div class="say"><p class="sentence">${answered ? marked(it) : gapped(it)}</p><p class="hint">${esc(it.m)}${!pick && tr(it) ? ` · ${tr(it)}` : ""}</p></div>
       ${body}
       ${fb}
     </article>
@@ -1255,11 +1315,13 @@ document.addEventListener("click", e => {
   if (bt.dataset.go) { if (bt.dataset.go === "quiz") quiz = null; bt.dataset.go === "deck" ? go("deck", { deck: bt.dataset.deck }) : go(bt.dataset.go); return; }
   if (bt.dataset.deck) { go("deck", { deck: bt.dataset.deck }); return; }
   if (bt.dataset.rate) { rateCard(+bt.dataset.rate); return; }
-  if (bt.dataset.sopt !== undefined) { studyPick(bt.dataset.sopt); return; }
-  if (bt.dataset.opt !== undefined) { answer(bt.dataset.opt); return; }
+  if (bt.dataset.ssel !== undefined) { sess.sel = bt.dataset.ssel; render(); return; }
+  if (bt.dataset.qsel !== undefined) { quiz.qs[quiz.i].sel = bt.dataset.qsel; render(); return; }
   const a = bt.dataset.act;
   if (a === "study-all") startStudy(null);
   else if (a === "study-deck") startStudy(ctx.deck, ctx.lvl);
+  else if (a === "study-check-pick") { if (sess.sel) studyPick(sess.sel); }
+  else if (a === "quiz-check-pick") { const q = quiz.qs[quiz.i]; if (q.sel) answer(q.sel); }
   else if (a === "to-type") { sess.step = "type"; render(); }
   else if (a === "study-reveal") studyCheck(null);
   else if (a === "ui") { S.ui = bt.dataset.ui; save(); render(); }
@@ -1283,7 +1345,8 @@ document.addEventListener("click", e => {
 document.addEventListener("keydown", e => {
   if (view !== "study" || !sess || !sess.queue.length) return;
   if (e.target.matches("input, select, textarea")) return;
-  if (sess.step === "pick" && sess.pickOk === null && ["1", "2", "3", "4"].includes(e.key)) studyPick(sess.opts[+e.key - 1]);
+  if (sess.step === "pick" && sess.pickOk === null && ["1", "2", "3", "4"].includes(e.key)) { sess.sel = sess.opts[+e.key - 1]; render(); }
+  else if (sess.step === "pick" && sess.pickOk === null && e.key === "Enter" && sess.sel) { e.preventDefault(); studyPick(sess.sel); }
   else if (sess.step === "done" && sess.typeOk && ["1", "2", "3"].includes(e.key)) rateCard(+e.key);
 });
 if (SPEAK) { try { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => { if (view === "settings") { const y = scrollY; render(); scrollTo(0, y); } }; } catch (e) {} }
