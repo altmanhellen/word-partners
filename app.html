@@ -942,7 +942,7 @@ function vToday() {
   const total = due + nl;
   const started = Object.keys(S.cards).length;
   const known = ITEMS.filter(i => status(i.id) === "known").length;
-  const pick = ITEMS[(today() * 7) % ITEMS.length];
+  const dayPool = byLevel() ? ITEMS.filter(x => x.lv === myLevel()) : ITEMS, pick = (dayPool.length ? dayPool : ITEMS)[(today() * 7) % (dayPool.length || ITEMS.length)];
   return `
   <section class="hero">
     <div class="top-row">
